@@ -1,0 +1,13 @@
+export const EMPTY_LINE = ["", "", "", "", "", ""];
+
+export enum OUTPUT_TYPE {
+  IGNORE_TITLE,
+  IGNORE_ITEM,
+  STATIC_TITLE,
+  STATIC_ITEM,
+  POOL_TITLE,
+  POOL_ITEM,
+  DEFAULT_TITLE,
+  DEFAULT_ITEM,
+  EMPTY_LINE,
+}
