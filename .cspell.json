@@ -1,0 +1,7 @@
+{
+  "version": "0.1",
+  "language": "en",
+  "words": ["codefend", "vitepress", "decompile", "minifiers", "unobfuscated"],
+  "flagWords": [],
+  "ignorePaths": ["package.json", "package-lock.json", "node_modules/**"]
+}
