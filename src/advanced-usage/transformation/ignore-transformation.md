@@ -18,7 +18,7 @@ In case the `_` or `-` was in the variable <b>name</b> or the <b>value</b> of:
 :::
 
 ```json
-// .codefendrc.json
+// .codefendrc
 {
   //...
   "transformation": {
@@ -52,7 +52,7 @@ The same transformation is applied to the Folders and File names,
 For example:
 
 ```json
-// .codefendrc.json
+// .codefendrc
 {
   //...
   "transformation": {

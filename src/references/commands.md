@@ -8,14 +8,14 @@ Usage: codefend [options]
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -i, --init       Create the config file (.codefendrc.json)
+  -i, --init       Create the config file (.codefendrc)
   -o, --obfuscate  Obfuscate the project
   -c, --check      Check the config file for potential errors and warnings
   -v, --version    Output the version number
   -h, --help       Display help for command
 ```
 
-- `codefend -i` or `codefend --init`: This command allows you to create the configuration file (.codefendrc.json). The configuration file is essential for specifying the settings and options for the obfuscation process.
+- `codefend -i` or `codefend --init`: This command allows you to create the configuration file (.codefendrc). The configuration file is essential for specifying the settings and options for the obfuscation process.
 
 - `codefend -o` or `codefend --obfuscate`: Use this command to initiate the obfuscation process for your project. It will apply the specified obfuscation settings from the configuration file to protect your source code.
 

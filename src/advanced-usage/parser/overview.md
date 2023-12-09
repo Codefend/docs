@@ -3,7 +3,7 @@
 Codefend uses regex patterns to find words for obfuscation in your code, folders, and files.
 
 ```json
-// .codefendrc.json
+// .codefendrc
 
 {
   "generation": {

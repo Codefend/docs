@@ -1,6 +1,6 @@
 # Generating the Configuration File
 
-To generate the configuration file `.codefendrc.json` required by Codefend, execute the following command:
+To generate the configuration file `.codefendrc` required by Codefend, execute the following command:
 
 ```bash
 cd [your-project-root-folder-goes-here]
