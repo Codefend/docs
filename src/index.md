@@ -21,8 +21,8 @@ features:
     details: Safeguard your source code through an irreversible process that ensures maximum security and protection against reverse engineering attempts.
   - title: 2 Layers Obfuscation 🪞
     details: Enhance your code's security by adding an additional layer of protection. Achieve complete code protection by combining Codefend with your existing uglifiers for an added level of defense.
-  - title: User-Friendly 🚀
-    details: Once you grasp the concept, it becomes incredibly straightforward and effortless.
-  # - title: Enhanced Network Security
-  #   details: Obfuscate the communication between your backend and frontend applications.
+  # - title: User-Friendly 🚀
+  #   details: Once you grasp the concept, it becomes incredibly straightforward and effortless.
+  - title: Secure Communication 🚀
+    details: Obfuscate the communication between your backend and frontend applications. (optional)
 ---

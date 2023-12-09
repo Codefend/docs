@@ -1,9 +1,9 @@
 # Configuration
 
-Below is the default configuration generated inside .codefend.json when executing the command: `codefend -i`:
+Below is the default configuration generated inside .codefendrc.json when executing the command: `codefend -i`:
 
 ```json
-// .codefend.json
+// .codefendrc.json
 
 {
   "generation": {

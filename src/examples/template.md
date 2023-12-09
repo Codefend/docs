@@ -63,7 +63,7 @@ You can find more information about the installation process in the [installatio
 
 ### Configuration file
 
-Create a new file `.codefend.json` in the root level of your project:
+Create a new file `.codefendrc.json` in the root level of your project:
 
 ```diff
 
@@ -75,14 +75,14 @@ Create a new file `.codefend.json` in the root level of your project:
 ├── node_modules
 ├── package.json
 ├── package-lock.json
-+   .codefend.json
++   .codefendrc.json
 
 ```
 
-Open `.codefend.json` and paste the following content:
+Open `.codefendrc.json` and paste the following content:
 
 ```json
-// .codefend.json
+// .codefendrc.json
 
 {
   "generation": {

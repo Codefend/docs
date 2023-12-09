@@ -136,6 +136,13 @@ export default defineConfig({
           { text: "Svelte", link: "/examples/Svelte" },
         ],
       },
+      {
+        text: "Migration guide",
+        collapsed: false,
+        items: [
+          { text: "Migrate to Codefend 3", link: "/migrations/codefend-v3" },
+        ],
+      },
     ],
     socialLinks: [
       {

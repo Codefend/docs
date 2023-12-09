@@ -17,7 +17,7 @@
 :::
 
 ```json
-// .codefend.json
+// .codefendrc.json
 {
   //...
   "transformation": {
@@ -30,7 +30,7 @@
 Or can be a space array of strings:
 
 ```json
-// .codefend.json
+// .codefendrc.json
 {
   //...
   "transformation": {
@@ -68,7 +68,7 @@ The letter `I` has not been used in the pool transformation because Codefend onl
 Similarly, this transformation can be applied to folder and file names as well:
 
 ```json
-// .codefend.json
+// .codefendrc.json
 
 {
   //...

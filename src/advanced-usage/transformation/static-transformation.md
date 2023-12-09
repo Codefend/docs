@@ -7,7 +7,7 @@ The static transformation in Codefend allows you to customize specific words by 
 Enhanced Network Security: Encrypt the communication between your backend and frontend projects, making it more challenging for reverse engineering attempts to intercept network requests.
 
 ```json
-// .codefend.json
+// .codefendrc.json
 {
   //...
   "transformation": {
@@ -60,7 +60,7 @@ In both your frontend and backend code, you will utilize `l_name` and `l_age` as
 :::
 
 ```json
-// .codefend.json
+// .codefendrc.json
 
 {
   //...
@@ -100,7 +100,7 @@ The same transformation is applied to the Folders and File names,
 For example:
 
 ```json
-// .codefend.json
+// .codefendrc.json
 
 {
   //...
