@@ -12,7 +12,7 @@ However, it is important to proceed with caution and be aware that making change
 This can be accomplished by adjusting the regex list in the configuration file to your requirements:
 
 ```json
-// .codefendrc
+// .codefendrc.json
 
 {
 ...

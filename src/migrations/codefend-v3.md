@@ -4,7 +4,7 @@ Follow these steps to migrate to Codefend 3:
 
 1. Navigate to your project directory.
 
-2. Move your existing `.codefendrc` file out of your project structure for backup.
+2. Move your existing `.codefendrc.json` file out of your project structure for backup.
 
 3. Install the latest version of Codefend globally or as a development dependency:
 

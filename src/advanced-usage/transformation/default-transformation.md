@@ -3,7 +3,7 @@
 The default transformation relies on the `prefix` specified in the configuration file and on the current index of the detected word's occurrence.
 
 ```json
-// .codefendrc
+// .codefendrc.json
 
 {
   //...
