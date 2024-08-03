@@ -19,7 +19,8 @@ Below is the default configuration generated inside .codefendrc.json when execut
       ".vscode",
       "build",
       "dist",
-      "README.md"
+      "README.md",
+      "package-lock.json"
     ]
   },
 
