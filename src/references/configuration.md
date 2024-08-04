@@ -1,3 +1,5 @@
+# Configuration
+
 Below is the default configuration generated inside .codefendrc.json when executing the command: `codefend -i`:
 
 ```json
