@@ -79,7 +79,8 @@ Below is the default configuration generated inside `.codefendrc.json` when exec
 
 - **`name`** `string` (default: `default`, can be: `default`, `codeOnly`, `fileOnly`, `custom`)
   Specifies the parser to use for obfuscation.
-  **Only if** the parser is set to `custom`, you will have to specify the `regexList`.
+
+  **Only when** the parser is set to `custom`, you will need to specify the `regexList`.
 
 - **`regexList`** `string[]` (default: `[]`)
 
