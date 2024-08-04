@@ -1,4 +1,4 @@
-Certainly! Here’s the configuration file with titles as links, similar to the Vite documentation style:
+Below is the default configuration generated inside .codefendrc.json when executing the command: `codefend -i`:
 
 ```json
 // .codefendrc.json
