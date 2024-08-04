@@ -24,5 +24,5 @@ features:
   # - title: User-Friendly 🚀
   #   details: Once you grasp the concept, it becomes incredibly straightforward and effortless.
   - title: Secure Communication 🚀
-    details: Obfuscate the communication between your backend and frontend applications. (optional)
+    details: Obfuscate the communication between your backend and frontend applications.
 ---
