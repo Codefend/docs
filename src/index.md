@@ -18,7 +18,7 @@ features:
   - title: Universality  🪩
     details: Codefend seamlessly integrates with any language or framework, offering a flexible solution for protecting your code across various development environments.
 
-  - title: Performance Preservation 🛡️
+  - title: Performance Unchanged ⚡
     details: Enjoy the benefits of code obfuscation without any impact on your application's performance.
 
   - title: Irreversible 🚧
