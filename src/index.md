@@ -16,13 +16,17 @@ hero:
 
 features:
   - title: Universality  🪩
-    details: Codefend effortlessly adapts to any language or framework, providing a versatile solution for protecting your code regardless of your development environment.
+    details: Codefend seamlessly integrates with any language or framework, offering a flexible solution for protecting your code across various development environments.
+
+  - title: Performance Preservation 🛡️
+    details: Enjoy the benefits of code obfuscation without any impact on your application's performance.
+
   - title: Irreversible 🚧
-    details: Safeguard your source code through an irreversible process that ensures maximum security and protection against reverse engineering attempts.
+    details: Ensure maximum security with Codefend's irreversible obfuscation process, protecting your source code from reverse engineering attempts.
+
   - title: 2 Layers Obfuscation 🪞
-    details: Enhance your code's security by adding an additional layer of protection. Achieve complete code protection by combining Codefend with your existing uglifiers for an added level of defense.
-  # - title: User-Friendly 🚀
-  #   details: Once you grasp the concept, it becomes incredibly straightforward and effortless.
+    details: Boost your code's security by adding an extra layer of obfuscation. Combine Codefend with your existing uglifiers for enhanced protection.
+
   - title: Secure Communication 🚀
-    details: Obfuscate the communication between your backend and frontend applications.
+    details: Obfuscate the messages exchanged between your backend and frontend applications to ensure secure communication.
 ---
