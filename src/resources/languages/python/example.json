@@ -1,0 +1,8 @@
+{
+  "language": "Python",
+  "title": "Python source obfuscation",
+  "route": "/examples/python",
+  "sourceFiles": ["main.py"],
+  "entry": "main.py",
+  "expectedOutput": "1800"
+}

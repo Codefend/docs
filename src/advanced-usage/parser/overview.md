@@ -1,45 +1,58 @@
 # Parser
 
-Codefend uses regex patterns to find words for obfuscation in your code, folders, and files.
+A Codefend parser is a list of regular expressions that discover names for replacement. It does not parse a programming language's syntax tree.
+
+## Built-in parsers
+
+| Name       | Rules selected                                                                                       |
+| ---------- | ---------------------------------------------------------------------------------------------------- |
+| `default`  | Both the underscore code-name rule and hyphenated file-name rule.                                    |
+| `codeOnly` | Underscore names such as `l_value`, `m_camera`, and `c_User`.                                        |
+| `fileOnly` | Hyphenated names beginning with `pkg`, `cmp`, `lib`, `file`, `folder`, `module`, `style`, or `main`. |
+| `Parser_A` | Deprecated alias for `default`; use `default` for new configurations.                                |
+
+For example, this configuration fragment selects the code-name rule:
 
 ```json
-// .codefendrc.json
-
 {
-  "generation": {
-   ...
-  },
-
-  "transformation": {
-    ....
-  },
-  "debug": {
-   ...
-  },
   "parser": {
+    "name": "codeOnly"
+  }
+}
+```
+
+Use a built-in parser when its naming convention matches the names you intend to change. The names describe the matching rules, not separate processing targets. Every rule can match source contents and path strings.
+
+## Why the language examples use a custom parser
+
+The examples mark application-owned names with `l_`, such as `l_total`. A custom rule limits discovery to that convention. The broader `codeOnly` rule also discovers unrelated underscore names, including Arduino's `LED_BUILTIN` and names such as `external_value`.
+
+This explicit selection helps preserve library APIs and framework entry points while you introduce the naming convention. It uses the same replacement engine; it does not provide stronger obfuscation or automatic knowledge of private/public symbols.
+
+Use `name: "custom"` with a nonempty `regexList`:
+
+```json
+{
+  "parser": {
+    "name": "custom",
     "regexList": [
       {
-        "name": "main",
-        "value": "([a-zA-Z]+(_[a-zA-Z0-9]+)+)"
-      },
-      {
-        "name": "file",
-        "value": "((cmp|lib)+(-[a-zA-Z0-9]+)+)"
+        "name": "applicationNames",
+        "value": "\\bl_[A-Za-z][A-Za-z0-9]*\\b"
       }
     ]
   }
 }
 ```
 
-:::tip Understanding the Impact of Regex Names in Obfuscation Statistics
+This rule selects the example's `l_` names followed by an ASCII letter and then letters or digits. It does not select every possible underscore-containing name.
 
-In the obfuscation process, regex names play a crucial role. Although these names do not affect parsing, they serve for statistical analysis at the end to determine <b>which words have been parsed by each regex</b>.
+Each item has a descriptive `name` and a regex-source string in `value`. Codefend compiles custom expressions with the `g` flag. Omit surrounding `/` delimiters and flags; JSON requires doubled backslashes.
 
-This information provides a <b>detailed breakdown</b> of the obfuscation process, allowing you to understand how each regex contributes to the project's overall transformation.
+Supplying `regexList` with a built-in `name` does not override that built-in parser. The current bundler adapters select their built-in `codeOnly` parser rather than exposing this custom-parser setting.
 
-It also enables you to apply different <b>transformation techniques</b> in case essential words were unnecessarily obfuscated, potentially disrupting the compilation process.
-:::
+## Selection is only one step
 
-You have the flexibility to customize your regex usage according to your needs. Whether you want to add multiple ones, use only one, or modify existing, the choice is entirely up to you.
+Discovery rules can match text in strings, comments, and paths too. Core's later replacement step has separate case/boundary limitations, so a name excluded during discovery is not a guarantee that every occurrence stays untouched.
 
-Remember, altering the regex also means modifying the naming convention in your project. For further details, you can refer to the information provided in the [custom naming convention](custom-naming-convention) section.
+See [custom naming conventions](custom-naming-convention) for a complete configuration and [troubleshooting](/distribution/troubleshooting) before adopting a rule in a larger project.

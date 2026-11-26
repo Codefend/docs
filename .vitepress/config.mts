@@ -1,32 +1,56 @@
 import { defineConfig } from "vitepress";
 
+const siteUrl = "https://codefend.github.io/docs/";
+const description =
+  "Codefend source obfuscation guides for C#, C++, Python, Java, JavaScript, and more, plus Arduino and bundler examples.";
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Codefend",
-  titleTemplate: "Protect any source code",
-  description: "Protect any source code",
+  titleTemplate: ":title | Codefend",
+  description,
   lastUpdated: true,
   lang: "en-US",
   base: "/docs/",
   srcDir: "src",
+  srcExclude: ["resources/**/*.md", "examples/template.md"],
   cleanUrls: true,
+  sitemap: { hostname: siteUrl },
+  transformHead({ pageData }) {
+    if (pageData.relativePath === "404.md") return [];
+    const route = pageData.relativePath
+      .replace(/(^|\/)index\.md$/, "$1")
+      .replace(/\.md$/, "");
+    const url = new URL(route, siteUrl).href;
+    const pageDescription = pageData.description || description;
+    return [
+      ["link", { rel: "canonical", href: url }],
+      ["meta", { property: "og:type", content: "website" }],
+      ["meta", { property: "og:site_name", content: "Codefend" }],
+      ["meta", { property: "og:title", content: pageData.title || "Codefend" }],
+      ["meta", { property: "og:description", content: pageDescription }],
+      ["meta", { property: "og:url", content: url }],
+      ["meta", { name: "twitter:card", content: "summary" }],
+    ];
+  },
   themeConfig: {
     search: {
       provider: "local",
     },
 
     nav: [
-      // { text: "Home", link: "/" },
-      // { text: "Examples", link: "/markdown-examples" },
+      { text: "Guide", link: "/get-started/introduction" },
+      { text: "Examples", link: "/examples/list" },
+      { text: "Languages", link: "/examples/list#languages" },
     ],
 
     sidebar: [
       {
-        text: "Get Sarted",
+        text: "Get Started",
         collapsed: false,
         items: [
           { text: "Introduction", link: "/get-started/introduction" },
-          { text: "How it works?", link: "/get-started/how-it-works" },
+          { text: "How it works", link: "/get-started/how-it-works" },
           { text: "Installation", link: "/get-started/installation" },
         ],
       },
@@ -125,15 +149,30 @@ export default defineConfig({
         collapsed: true,
         link: "/examples/list",
         items: [
-          { text: "Node js", link: "/examples/nodejs" },
-          { text: "C++", link: "/examples/cplusplus" },
-          { text: "Java", link: "/examples/java" },
+          { text: "JavaScript (Node.js)", link: "/examples/nodejs" },
+          { text: "TypeScript", link: "/examples/typescript" },
+          { text: "Arduino", link: "/examples/arduino" },
+          { text: "Python", link: "/examples/python" },
           { text: "C#", link: "/examples/csharp" },
+          { text: "Java", link: "/examples/java" },
+          { text: "C", link: "/examples/c" },
+          { text: "C++", link: "/examples/cplusplus" },
+          { text: "Go", link: "/examples/go" },
+          { text: "Rust", link: "/examples/rust" },
           { text: "PHP", link: "/examples/php" },
-          { text: "Angular", link: "/examples/angular" },
-          { text: "React", link: "/examples/react" },
-          { text: "Vuejs", link: "/examples/vuejs" },
-          { text: "Svelte", link: "/examples/Svelte" },
+          { text: "Ruby", link: "/examples/ruby" },
+          { text: "Kotlin", link: "/examples/kotlin" },
+          { text: "Swift", link: "/examples/swift" },
+          { text: "Dart", link: "/examples/dart" },
+          { text: "R", link: "/examples/r" },
+          { text: "Lua", link: "/examples/lua" },
+          { text: "SQL (SQLite)", link: "/examples/sql" },
+          { text: "Bash", link: "/examples/bash" },
+          { text: "PowerShell", link: "/examples/powershell" },
+          { text: "HTML and CSS", link: "/examples/html-css" },
+          { text: "Vite", link: "/examples/vite" },
+          { text: "Rollup", link: "/examples/rollup" },
+          { text: "Webpack", link: "/examples/webpack" },
         ],
       },
       {
@@ -151,14 +190,4 @@ export default defineConfig({
       },
     ],
   },
-  ignoreDeadLinks: [
-    "./../../../get-started/installation",
-    "./../../../basic-usage/generating-configuration",
-    "./../../../references/configuration",
-    "./../../../basic-usage/obfuscation",
-    "./../../../references/commands",
-    "./../../../distribution/troubleshooting",
-    "./../../../distribution/build-and-deployment",
-    "./../advanced-usage/transformation/list",
-  ],
 });

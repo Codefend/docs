@@ -1,0 +1,15 @@
+{
+  "generation": {
+    "inputDir": "source",
+    "outputDir": "release"
+  },
+  "parser": {
+    "name": "custom",
+    "regexList": [
+      {
+        "name": "applicationNames",
+        "value": "\\bl_[A-Za-z][A-Za-z0-9]*\\b"
+      }
+    ]
+  }
+}

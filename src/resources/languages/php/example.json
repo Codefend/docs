@@ -1,0 +1,8 @@
+{
+  "language": "PHP",
+  "title": "PHP source obfuscation",
+  "route": "/examples/php",
+  "sourceFiles": ["main.php"],
+  "entry": "main.php",
+  "expectedOutput": "1800"
+}

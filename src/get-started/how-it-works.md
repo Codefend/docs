@@ -1,37 +1,37 @@
-# How it works?
+# How Codefend works
 
-### 1. Parsing Phase
+## 1. Find matching text
 
-Codefend parses through every word in your project's files.
-This analysis targets a [specific naming convention](../basic-usage/naming-conventions/naming-conventions.md) that is <b>crucial</b> for the tool's proper functioning. Thanks to this unique parsing feature, Codefend operates seamlessly with any programming language and framework, providing effective and versatile code protection.
-:::tip <b>Key Elements Analyzed:</b>
+A [parser](/advanced-usage/parser/overview) is a list of regular expressions. The built-in rules find underscore names such as `l_temperature` and certain hyphenated paths such as `file-sensor`.
 
-- Folders names
-- Files names
-- Classes names
-- Functions names
-- Variables names
-  :::
+Matching is textual: Codefend does not resolve variable scope, distinguish a class member from a local variable, or restrict matches to executable code. The same text in a string or comment can be selected.
 
-### 2. Transformation Phase
+## 2. Assign replacement names
 
-Once Codefend identifies words that conform to the predefined pattern, it proceeds to obfuscate those particular words using different [transformation techniques](../advanced-usage/transformation//list.md).
+The [transformation settings](/advanced-usage/transformation/list) choose what each selected word becomes. The default uses `Ox` followed by an index. For a fresh runtime processing this snippet alone:
 
-:::tip <b>Default Transformation Technique Overview</b>
-`l_fullName = l_firstName + l_lastName  ---->  Ox0 = Ox1 + Ox2`
+```js
+const l_value = 7;
+console.log(l_value);
+```
 
-- This technique uses a prefix specified in the configuration file: `Ox`
-- It relies on the index of when each word is first detected: `0`, `1`, `2`
-  :::
+the output is:
 
-### 3. Generation Phase
+```js
+const Ox0 = 7;
+console.log(Ox0);
+```
 
-After analyzing and transforming the words in your source code stored in memory, Codefend <b>creates a new separate directory containing the obfuscated version of your source code</b>.
+The exact numbering in a larger project depends on the words processed. Use the mapping statistics and generated output when reviewing a build; do not treat these small example numbers as a project-wide naming contract.
 
-Unlike other tools that directly obfuscate your final output during the build process, Codefend takes a different approach. It generates a source code from your original source code, essentially creating a hidden secret code within another secret code.
+## 3. Generate or bundle
 
-This simple but powerful change brings numerous benefits:
+The CLI copies the configured input to a generated directory, transforms matching paths, and processes the copied text files. Build and test that generated source with your usual tools.
 
-- Enhanced Security: Imagine a hacker manages to decompile your application. By using Codefend, you won't be building your application directly from the original source code, but from the obfuscated version. Consequently, the hacker won't gain access to your original source code.
+The [Rollup](/examples/rollup), [Vite](/examples/vite), and [Webpack](/examples/webpack) integrations run during bundling instead. They do not use the CLI's source-directory generation settings.
 
-- Multi-Layer Obfuscation: The obfuscation process occurs prior to the build process, allowing you to apply additional layers of protection to the obfuscated version of your project. You can add various uglifiers, minifiers, and obfuscators of your choice, further increasing the security of your code.
+## Verify the result
+
+Keep public APIs, library names, required entry points, and external data formats compatible. For example, an Arduino sketch must retain `setup()` and `loop()`. Inspect the [Arduino workflow](/examples/arduino) for a concrete example.
+
+Obfuscation changes names; it does not encrypt data or guarantee protection against reverse engineering. Read the [current limitations](/distribution/troubleshooting) before using it on a larger project.

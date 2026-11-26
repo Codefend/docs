@@ -1,0 +1,8 @@
+{
+  "language": "Kotlin",
+  "title": "Kotlin source obfuscation",
+  "route": "/examples/kotlin",
+  "sourceFiles": ["Main.kt"],
+  "entry": "Main.kt",
+  "expectedOutput": "75"
+}

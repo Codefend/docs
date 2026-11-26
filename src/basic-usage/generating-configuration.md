@@ -1,18 +1,40 @@
-# Generating the Configuration File
+# Generating the configuration file
 
-To generate the configuration file `.codefendrc.json` required by Codefend, execute the following command:
+From your project directory, create `.codefendrc.json`:
 
 ```bash
-cd [your-project-root-folder-goes-here]
-codefend -i
-
+npx codefend --init
 ```
 
-:::tip Configuration list
-A detailed section about Codefend configuration can be found [here](../references/configuration).
-:::
+Create it once, then edit it for your source layout and naming convention. In Codefend, running `--init` again overwrites an existing configuration; save a copy before regenerating it.
 
-:::tip One-time
-Please note that executing this command is a <b>one-time</b> requirement <b>per project</b>.
-:::
-This file serves as the foundation for configuring and customizing Codefend according to your specific language or framework needs. Please note that the configuration <b>won't</b> change dramatically per language or per framework.
+The generated configuration includes source/output settings, transformations, parser selection, debugging settings, and generated `__meta` information. See the [configuration reference](/references/configuration).
+
+For a first source-only project, use separate input and output directories under the project root. For example, `source` contains your text sources and `generated` is disposable output:
+
+```json
+{
+  "generation": {
+    "inputDir": "source",
+    "outputDir": "generated",
+    "ignore": ["node_modules", ".git", "package-lock.json"]
+  },
+  "transformation": {
+    "prefix": "Ox",
+    "static": [],
+    "ignore": [],
+    "pool": []
+  },
+  "parser": {
+    "name": "codeOnly"
+  },
+  "debug": {
+    "stats": true,
+    "ignoredWarnings": []
+  }
+}
+```
+
+Create `source` before running Codefend and keep the output's parent directory present. Choose an output path that contains no parser-matching names. Never point output at the source, a source ancestor, or a directory containing files you need: the current CLI removes the output directory at the start of a run.
+
+Use a text-only input tree. Current CLI processing reads every copied file as UTF-8, so binary assets need to be kept outside that tree and copied separately by your build. See [obfuscation](/basic-usage/obfuscation) for the next steps.

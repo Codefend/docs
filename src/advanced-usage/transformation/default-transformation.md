@@ -1,47 +1,31 @@
-# Default Transformation
+# Default transformation
 
-The default transformation relies on the `prefix` specified in the configuration file and on the current index of the detected word's occurrence.
+The default transformation assigns a configured prefix followed by a numeric index. The default prefix is `Ox`.
+
+Merge this fragment into your configuration:
 
 ```json
-// .codefendrc.json
-
 {
-  //...
   "transformation": {
     "prefix": "Ox"
-    //...
   }
 }
 ```
 
-For example:
+For a fresh runtime processing this snippet alone:
 
-```
-l_variable1 = l_variable2 + l_variable3
-```
-
-Gets transformed to:
-
-```
-Ox0 = Ox1 + Ox2
+```js
+const l_value = 7;
+console.log(l_value);
 ```
 
-:::tip
-Here, `Ox` represents the prefix, and `0`, `1`, and `2` are the respective indexes of the obfuscated words.
-:::
+the output is:
 
-The transformation is also applied to folder and file names, as shown in the following example:
-
-```
-├── pkg-src
-│   ├── pkg-controller
-│   │   ├── file-user-controller.js
+```js
+const Ox0 = 7;
+console.log(Ox0);
 ```
 
-Gets transformed to:
+Other detected names receive their own generated names. The exact numbering depends on processing order and the other transformation settings. It is not derived from the number of occurrences of a word.
 
-```
-├── Ox0
-│   ├── Ox1
-│   │   ├── Ox2.js
-```
+Selected names in paths and source references can also be replaced. Keep required filenames and external interfaces stable, and inspect the generated result. Choose a prefix that is valid for your language and does not collide with existing names; current Codefend does not provide complete collision detection.
