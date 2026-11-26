@@ -1,0 +1,9 @@
+{
+  "language": "C",
+  "title": "C source obfuscation",
+  "route": "/examples/c",
+  "sourceFiles": ["main.c"],
+  "entry": "main.c",
+  "expectedOutput": "42",
+  "preservedSymbols": ["main", "printf"]
+}

@@ -1,0 +1,9 @@
+{
+  "language": "Go",
+  "title": "Go source obfuscation",
+  "route": "/examples/go",
+  "sourceFiles": ["main.go"],
+  "entry": "main.go",
+  "expectedOutput": "42",
+  "preservedSymbols": ["package main", "func main()", "fmt.Println"]
+}

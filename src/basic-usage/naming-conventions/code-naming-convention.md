@@ -1,111 +1,47 @@
-# Code Naming convention
+# Code naming convention
 
-To ensure <b>detection</b> by Codefend's parser, it is <b>necessary</b> for the words that need to be obfuscated to follow this format:
+The built-in `codeOnly` rule finds names consisting of ASCII letters followed by one or more underscore-separated alphanumeric segments. Examples include:
 
-### The word must include an underscore `_` positioned in the middle.
+- `l_value`
+- `f_readSensor`
+- `m_camera`
+- `c_UserManager`
+- `node_John_Doe`
 
-:::tip Example
-You have the flexibility to use either camelCase or PascalCase, and both are acceptable. However, it's important to follow the specified naming convention in addition to the chosen case style:
+The parser's regular expression is:
 
-- `MyVariable` -> `l_MyVariable`
-- `myVariable` -> `l_myVariable`
-  :::
-
-```javascript
------------------------------- Before Obfuscation ------------------------------
-
-class l_Calculator {
-  l_sum(l_firstNumber, l_secondNumber) {
-    const l_results = l_firstNumber + l_secondNumber;
-    return l_results;
-  }
-}
+```js
+/([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g;
 ```
 
-```javascript
------------------------------- After Obfuscation ------------------------------
-class Ox0 {
-  Ox1(Ox2, Ox3) {
-    const Ox4 = Ox2 + Ox3;
-    return Ox4;
-  }
-}
+You can mark internal names while leaving required APIs unchanged. For a fresh runtime processing this snippet alone:
+
+```js
+const l_value = 7;
+console.log(l_value);
 ```
 
-:::tip This naming convention can also be applied inside HTML, CSS, and JS files or even React, Vue, Angular, and Svelte components... Here's another example:
-:::
+the output is:
 
-```html
------------------------------- Before Obfuscation ------------------------------
-<html>
-  <head>
-    <style>
-      .l_red {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="l_red">l_secret</div>
-    <div class="l_red">Hello World</div>
-  </body>
-</html>
+```js
+const Ox0 = 7;
+console.log(Ox0);
 ```
 
-```html
------------------------------- After Obfuscation ------------------------------
-<html>
-  <head>
-    <style>
-      .Ox1 {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="Ox1">Ox0</div>
-    <div class="Ox1">Hello World</div>
-  </body>
-</html>
-```
+## Optional prefixes
 
-## Structured naming convention <Badge type="tip" text="optional" />
+Prefixes can communicate the original role of a name to maintainers:
 
-:::tip Given that the underscore should be in the middle of the word, an alternative option is to adopt a more structured naming convention, which can enhance the organization of your code:
+| Convention     | Example         |
+| -------------- | --------------- |
+| Class          | `c_UserManager` |
+| Function       | `f_readSensor`  |
+| Parameter      | `p_sampleCount` |
+| Local variable | `l_total`       |
+| Member         | `m_temperature` |
 
-1. Class names: Begin with "c\_" followed by the descriptive name.
-   - Example: `c_UserManager`, `c_DataProcessor`, `c_Logger`
-2. Function names: Begin with "f\_" followed by the descriptive name.
-   - Example: `f_getUserData`, `f_calculateTotal`, `f_validateInput`
-3. Parameter names: Begin with "p\_" followed by the descriptive name.
-   - Example: `function doSomething(p_inputData) { ... }`
-   - Example: `function processUserData(p_userInfo) { ... }`
-4. Local variable names: Begin with "l\_" followed by the descriptive name.
-   - Example: `function calculateSum() { let l_totalSum = 0; ... }`
-   - Example: `function processArray() { let l_index = 0; ... }`
+Codefend does not infer those roles. All of these names match the same underscore rule, and comments or strings containing them can also change.
 
-By following this convention, you can easily identify the purpose and scope of different elements in your code. The underscore in the middle of the word, along with the specified prefixes, will provide a clear and consistent naming pattern, contributing to code readability and maintainability.
-:::
+The current rule and replacement engine can match parts of longer names. Use consistent casing, preserve external interfaces, and test both selected names and names that should remain unchanged. `codeOnly` also operates on path text; it does not guarantee filenames remain unchanged.
 
-```javascript
------------------------------- Before Obfuscation ------------------------------
-
-class c_Calculator {
-  f_sum(p_firstNumber, p_secondNumber) {
-    const l_results = p_firstNumber + p_secondNumber;
-    return l_results;
-  }
-}
-```
-
-```javascript
------------------------------- After Obfuscation ------------------------------
-class Ox0 {
-  Ox1(Ox2, Ox3) {
-    const Ox4 = Ox2 + Ox3;
-    return Ox4;
-  }
-}
-```
-
-<b>This is the only rule and the only requirement </b> that Codefend needs from you as a programmer. Simply ensure that the words you want to be obfuscated contain an underscore `_` in the middle, following the specified format, and Codefend will handle the rest of the obfuscation process seamlessly for any code written in any language.
+See the [Arduino](/examples/arduino) and [JavaScript bundler examples](/examples/vite) for concrete naming choices, or define a [custom naming convention](/advanced-usage/parser/custom-naming-convention).

@@ -1,0 +1,8 @@
+{
+  "language": "TypeScript",
+  "title": "TypeScript source obfuscation",
+  "route": "/examples/typescript",
+  "sourceFiles": ["main.cts"],
+  "entry": "main.cts",
+  "expectedOutput": "1800"
+}

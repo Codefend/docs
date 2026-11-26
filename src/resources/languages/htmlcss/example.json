@@ -1,0 +1,9 @@
+{
+  "language": "HTML and CSS",
+  "title": "HTML and CSS class obfuscation",
+  "route": "/examples/html-css",
+  "sourceFiles": ["index.html", "styles.css"],
+  "entry": "index.html",
+  "expectedOutput": "42",
+  "preservedSymbols": ["styles.css", "stylesheet"]
+}

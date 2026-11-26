@@ -1,0 +1,8 @@
+{
+  "language": "Bash",
+  "title": "Bash source obfuscation",
+  "route": "/examples/bash",
+  "sourceFiles": ["main.sh"],
+  "entry": "main.sh",
+  "expectedOutput": "42"
+}
