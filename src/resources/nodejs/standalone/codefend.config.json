@@ -1,0 +1,9 @@
+{
+  "generation": {
+    "inputDir": "source",
+    "outputDir": "release"
+  },
+  "parser": {
+    "name": "codeOnly"
+  }
+}

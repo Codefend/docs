@@ -1,0 +1,8 @@
+{
+  "language": "Dart",
+  "title": "Dart source obfuscation",
+  "route": "/examples/dart",
+  "sourceFiles": ["main.dart"],
+  "entry": "main.dart",
+  "expectedOutput": "1800"
+}

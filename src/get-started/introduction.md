@@ -1,21 +1,18 @@
 # Codefend
 
-Codefend is a powerful command-line interface (CLI) tool designed to enhance the security of your codebase by means of a specific unconventional obfuscation technique.
+Codefend renames selected words in source text and file paths using a naming convention. Its CLI creates a generated source directory that you can inspect, test, and build. Rollup and Webpack plugins integrate the same engine into JavaScript builds.
 
-What sets Codefend apart is its ability to work with all programming languages and frameworks, ensuring source code protection regardless of your development environment.
+You choose which names to mark, such as `l_temperature` or `f_calculateTotal`. Codefend replaces matching names with a configured prefix, explicit replacements, or words from a pool. The engine uses regular expressions rather than a language-specific syntax tree, so the same conventions can be applied to different text-based languages.
 
-Unlike traditional code protectors, Codefend takes a unique approach. Instead of directly obfuscating your final output during the build process, it generates a source code from your existing code, effectively creating a hidden secret code within another secret code.
+## Where to start
 
-To use Codefend effectively, all you need to do as a programmer is follow a specific [naming convention](../basic-usage/naming-conventions/naming-conventions.md). Once this requirement is met, the tool will function seamlessly, providing you with strengthened code security.
+- [Install Codefend](installation) and understand [how it works](how-it-works).
+- Try the [Node.js example](/examples/nodejs) for source generation.
+- Follow the [Arduino example](/examples/arduino) for a sketch workflow.
+- Integrate it with [Vite](/examples/vite), [Rollup](/examples/rollup), or [Webpack](/examples/webpack).
 
-Key Features:
+## What obfuscation provides
 
-- <b>Universality</b>: Works seamlessly with any programming language or framework.
-- <b>Irreversible Protection</b>: Ensures that your obfuscated code cannot be reversed.
-- <b>User-Friendly</b>: Easy to use, even for those new to code protection techniques.
-- <b>Multi-Layer Obfuscation</b>: Can work with any additional obfuscator or uglifier on top of it
-- <b>Enhanced Network Security</b>: Encrypt the communication between your <b>backend</b> and <b>frontend</b> projects [learn more](../advanced-usage/transformation/static-transformation.md)
+Renaming can make source code less readable and can be combined with your normal compiler, minifier, or other build tools. It does not encrypt source code, firmware, or network traffic. It cannot guarantee that a program cannot be understood or reverse engineered, and it does not hide secrets embedded in distributed code.
 
-:::tip
-To gain a deeper understanding of Codefend's capabilities and its ability to handle various programming languages, it's <b>highly recommended</b> to explore [how it works](how-it-works). This will offer valuable insights into the tool's operation and how it effectively protects different types of code.
-:::
+Because matching operates on text, it can affect strings, comments, public property names, and paths as well as identifiers. Keep external interfaces stable and test the generated program. The [troubleshooting guide](/distribution/troubleshooting) describes current limitations and checks to perform before distribution.

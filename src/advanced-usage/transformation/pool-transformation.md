@@ -1,109 +1,41 @@
-# Pool Transformation
+# Pool transformation
 
-- Pool Transformation allows you to add unlimited custom words and inject them into your code.
-- You can draw paragraphs from various sources, such as books, lyrics, dictionaries, and Lorem ipsum text.
-- Your code is obfuscated and transformed into a paragraph of your choice, making it misleading to any attempt to hack or understand it easily.
+A pool supplies candidate replacement names in place of prefix-generated names. It accepts a space-separated string or an array.
 
-:::tip Use Cases:
-
-1. Confuse and mislead hackers by disguising the obfuscated code to appear unobfuscated at first glance.
-
-2. Conceal the obfuscation process discreetly to avoid drawing attention, allowing for easier sharing of the project's source code without revealing its complexity.
-
-3. Get creative and have fun using text from books as the source code, but always be mindful of potential copyright issues.
-
-4. Express your passion for music by incorporating lyrics from your favorite songs as the source code, while being respectful of copyright laws.
-
-:::
+Configuration fragment:
 
 ```json
-// .codefendrc.json
 {
-  //...
   "transformation": {
-    "pool": "I love Bananas. Bananas are my favorite fruits."
-    //...
+    "pool": ["alpha", "bravo", "charlie"]
   }
 }
 ```
 
-Or can be a space array of strings:
+For a fresh runtime processing this snippet alone:
 
-```json
-// .codefendrc.json
-{
-  //...
-  "transformation": {
-    "pool": [
-      "I",
-      "love",
-      "Bananas.",
-      "Bananas",
-      "are",
-      "my",
-      "favorite",
-      "fruits"
-    ]
-    //...
-  }
-}
+```js
+const l_first = 1;
+const l_other = 2;
+console.log(l_first + l_other);
 ```
 
-For example:
+the output is:
 
-```python
-l_variable1 = l_variable2 + l_variable3
+```js
+const alpha = 1;
+const bravo = 2;
+console.log(alpha + bravo);
 ```
 
-Gets transformed to:
+The option builder lowercases pool words, removes underscores and special characters, removes leading digits, discards entries shorter than three characters, and deduplicates the resulting list. For example, `Bananas.` and `BANANAS` both normalize to `bananas`.
 
-```python
-love = bananas + are
-```
+Choose names valid for your target language. Normalization does not eliminate language keywords or prevent collisions with existing identifiers. The CLI's pool checks and API normalization are also different steps; simple identifier-only array entries are easier to review.
 
-:::tip Notice
-The letter `I` has not been used in the pool transformation because Codefend only utilizes words from the pool that consist of a minimum of three characters.
-:::
+## Current multi-file limitation
 
-Similarly, this transformation can be applied to folder and file names as well:
+Codefend can reuse a pool name for different words across successive calls sharing a runtime. It can also change an already emitted fallback mapping if a later call supplies more pool values. These issues can break references across source files or output chunks.
 
-```json
-// .codefendrc.json
+The example above demonstrates a single call only. Keep `pool: []` in the runnable project examples and use the default transformation until your complete workflow has verified mapping stability. A successful configuration check does not test this behavior.
 
-{
-  //...
-  "transformation": {
-    "pool": "I Love Bananas. Bananas are my favorite fruits."
-    //...
-  }
-}
-```
-
-For example:
-
-```
-├── pkg-src
-│   ├── pkg-controller
-│   │   ├── file-user-controller.js
-```
-
-Gets transformed to:
-
-```
-├── love
-│   ├── bananas
-│   │   ├── are.js
-```
-
-:::tip Notice
-Codefend allows duplicate words to be included in the pool; however, it will utilize each duplicate word only once during the pool transformation process.
-
-e.g: `Bananas` duplicate word in the pool has been only used once.
-:::
-
-:::tip Notice
-The words of the pool will all get transformed to lower case
-and any special character in the pool will be removed.
-
-e.g: `Bananas.` transformed to `bananas`
-:::
+When the pool runs out, unresolved words use prefix-generated fallback names. The current allocation limitations still apply; supplying a larger pool alone does not establish safe cross-file allocation. See [troubleshooting](/distribution/troubleshooting).

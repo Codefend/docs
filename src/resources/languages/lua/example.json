@@ -1,0 +1,8 @@
+{
+  "language": "Lua",
+  "title": "Lua source obfuscation",
+  "route": "/examples/lua",
+  "sourceFiles": ["main.lua"],
+  "entry": "main.lua",
+  "expectedOutput": "42"
+}

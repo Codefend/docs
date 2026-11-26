@@ -1,0 +1,8 @@
+{
+  "language": "Swift",
+  "title": "Swift source obfuscation",
+  "route": "/examples/swift",
+  "sourceFiles": ["main.swift"],
+  "entry": "main.swift",
+  "expectedOutput": "75"
+}

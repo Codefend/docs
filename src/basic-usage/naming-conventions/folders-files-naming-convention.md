@@ -1,69 +1,26 @@
-# Folders and Files naming convention
+# Folder and file naming convention
 
-To ensure <b>detection</b> by Codefend's parser, it is <b>necessary</b> for folder and file names to begin with the following specific words.
+The `fileOnly` parser selects hyphenated names such as:
 
-- `pkg-.*`
-- `cmp-.*`
-- `lib-.*`
-- `file-.*`
-- `folder-.*`
-- `module-.*`
-- `style-.*`
-- `main-.*`
+- `pkg-source`
+- `cmp-input`
+- `lib-sensor`
+- `file-controller`
+- `folder-models`
+- `module-network`
+- `style-main`
+- `main-page`
 
-```diff
------------------------------- Before Obfuscation ------------------------------
+The `default` parser includes this rule alongside the underscore code-name rule. Extensions are not part of these example matches: `file-sensor.js` can become a name such as `Ox0.js`.
 
-├── pkg-src
-│   ├── pkg-controller
-│   │   ├── file-user-controller.js
-│   ├── pkg-views
-│   │   ├── file-user-view.html
-│   ├── pkg-model
-│   │   ├── file-user-model.js
-│   ├── file-index.js
-├── pkg-public
-│   ├── pkg-css
-│   │   ├── main-style.css
-│   ├── pkg-images
-│   │   ├── file-image-1.png
-│   ├── pkg-js
-│   │   ├── file-sw.js
-│   ├── file-index.html
-├── pkg-dist
-├── node_modules
-├── package.json
-├── package-lock.json
-└── .gitignore
-```
+Codefend also replaces selected path text in source contents, including import strings. This is text replacement rather than module resolution. Keep references consistent and run the generated program's build and tests.
 
-```diff
-+------------------------------ After Obfuscation ------------------------------
+## Preserve toolchain-required names
 
-├── Ox0
-│   ├── Ox1
-│   │   ├── Ox2.js
-│   ├── Ox3
-│   │   ├── Ox4.html
-│   ├── Ox5
-│   │   ├── Ox6.js
-│   ├── Ox7.js
-├── Ox8
-│   ├── Ox9
-│   │   ├── Ox10.css
-│   ├── Ox11
-│   │   ├── Ox12.png
-│   ├── Ox13
-│   │   ├── Ox14.js
-│   ├── Ox15.html
-├── Ox16
-├── node_modules
-├── package.json
-├── package-lock.json
-└── .gitignore
+Some names are part of a toolchain contract. For example, Arduino requires the primary `.ino` file to match its sketch folder, and bundlers expect configured entry points. Use plain stable names when the toolchain requires them; do not add a naming prefix to every file automatically. The [Arduino example](/examples/arduino) keeps the sketch structure stable.
 
-```
+`generation.ignore` excludes exact file/directory entry names from CLI copying. It does not accept glob patterns. `transformation.ignore` instead preserves named text during transformation.
 
-By implementing this naming convention, you can ensure that the names of <b>any file</b> `.js .css .html .png .json .vue .c .cpp .zip...` and <b>any folder</b> are obfuscated. Additionally, Codefend will automatically update the corresponding imports inside your code to reflect the changes made during obfuscation.
+Keep binary assets outside the CLI's processed input tree in Codefend: the CLI rewrites copied contents as UTF-8, even when only a filename was intended to change. Let your build copy binary assets unchanged.
 
-In addition to the existing list, you can also include additional words or characters based on the parser specifications. Please refer to the [parser -> regexList -> file](../../references/configuration.md) documentation to learn more.
+To change which names are discovered, see [custom parser configuration](/advanced-usage/parser/custom-naming-convention).

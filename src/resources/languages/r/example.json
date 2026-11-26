@@ -1,0 +1,8 @@
+{
+  "language": "R",
+  "title": "R source obfuscation",
+  "route": "/examples/r",
+  "sourceFiles": ["main.R"],
+  "entry": "main.R",
+  "expectedOutput": "42"
+}

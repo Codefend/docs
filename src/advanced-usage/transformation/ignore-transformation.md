@@ -1,83 +1,37 @@
-# Ignore Transformation
+# Ignore transformation
 
-The ignore transformation in Codefend enables you to exclude specific words from being obfuscated. These words, once identified by the parser, are ignored and not obfuscated.
+`transformation.ignore` preserves named text during replacement. Use it for external property names, dependency interfaces, or other names that must remain stable.
 
-:::tip Use Cases:
-In case the `_` or `-` was in the variable <b>name</b> or the <b>value</b> of:
-
-1. **Environment variables**
-
-2. **API keys and credentials**
-
-3. **Constants**
-
-4. **External variables of a dependency that would break if changed**
-
-5. **Specific folder names, function names, class names, or critical elements of external libraries could lead to errors during the project's execution or building process.** Visit [troubleshooting](../../distribution/troubleshooting.md) section for more info.
-
-:::
+Merge this fragment into your configuration:
 
 ```json
-// .codefendrc.json
 {
-  //...
   "transformation": {
-    "ignore": ["l_variable1"]
-    //...
+    "ignore": ["external_value"]
   }
 }
 ```
 
-For example:
+For a fresh runtime processing:
 
-```python
-l_variable1 = l_variable2 + l_variable3
+```js
+const l_value = external_value;
+console.log(l_value);
 ```
 
-Gets transformed to:
+the output is:
 
-```python
-l_variable1  = Ox1 + Ox2
+```js
+const Ox0 = external_value;
+console.log(Ox0);
 ```
 
-:::tip
-In this example, notice how `l_variable1` has been ignored and kept as is, while the other detected variables have been transformed using the default transformation.
-:::
+Ignored entries are added directly to the replacement map, even if a parser did not discover them. In the current implementation, ignore mappings take precedence over static mappings for the same original text.
 
-:::tip
-The words of the `ignore` array must be detected by the `parser`, so they should follow the naming convention specified in the configuration.
-:::
+Use ordinary identifier spellings. In Codefend, regex metacharacters in static or ignore names can affect the replacement regex. Matching is textual and current case/boundary limitations still apply.
 
-The same transformation is applied to the Folders and File names,
-For example:
+## Excluding files is a separate setting
 
-```json
-// .codefendrc.json
-{
-  //...
-  "transformation": {
-    "ignore": ["node_modules"]
-    //...
-  }
-}
-```
+`transformation.ignore` retains text; it does not prevent files from being copied. Use `generation.ignore` for exact file/directory names that should be excluded from the CLI input tree. For example, the generated default configuration both excludes the `node_modules` directory from copying and keeps the text `node_modules` unchanged.
 
-```
-├── pkg-src
-│   ├── pkg-controller
-│   │   ├── file-user-controller.js
-└── node_modules
-```
-
-Gets transformed to:
-
-```
-├── Ox0
-│   ├── Ox1
-│   │   ├── Ox2.js
-└── node_modules
-```
-
-:::tip
-In the previous example, pay attention to the file name `node_modules`. Although it follows the naming convention of the code rather than typical file naming, there's no need to worry. Codefend will handle it just like any other variable detected, using the specified naming convention for obfuscation, even if it originally referred to a file name instead of a word within the code.
-:::
+Never rely on obfuscation to hide credentials. Keep secrets out of distributed source and firmware regardless of the ignore settings. See [troubleshooting](/distribution/troubleshooting) when a generated program fails.

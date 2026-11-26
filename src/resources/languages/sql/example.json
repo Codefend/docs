@@ -1,0 +1,8 @@
+{
+  "language": "SQL (SQLite)",
+  "title": "SQL (SQLite) source obfuscation",
+  "route": "/examples/sql",
+  "sourceFiles": ["main.sql"],
+  "entry": "main.sql",
+  "expectedOutput": "42"
+}

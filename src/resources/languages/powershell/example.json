@@ -1,0 +1,8 @@
+{
+  "language": "PowerShell",
+  "title": "PowerShell source obfuscation",
+  "route": "/examples/powershell",
+  "sourceFiles": ["main.ps1"],
+  "entry": "main.ps1",
+  "expectedOutput": "42"
+}

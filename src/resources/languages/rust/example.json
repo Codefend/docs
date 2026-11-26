@@ -1,0 +1,9 @@
+{
+  "language": "Rust",
+  "title": "Rust source obfuscation",
+  "route": "/examples/rust",
+  "sourceFiles": ["main.rs"],
+  "entry": "main.rs",
+  "expectedOutput": "42",
+  "preservedSymbols": ["fn main()", "println!"]
+}

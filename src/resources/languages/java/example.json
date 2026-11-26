@@ -1,0 +1,8 @@
+{
+  "language": "Java",
+  "title": "Java source obfuscation",
+  "route": "/examples/java",
+  "sourceFiles": ["Main.java"],
+  "entry": "Main.java",
+  "expectedOutput": "75"
+}

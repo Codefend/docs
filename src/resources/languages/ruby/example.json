@@ -1,0 +1,8 @@
+{
+  "language": "Ruby",
+  "title": "Ruby source obfuscation",
+  "route": "/examples/ruby",
+  "sourceFiles": ["main.rb"],
+  "entry": "main.rb",
+  "expectedOutput": "1800"
+}

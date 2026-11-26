@@ -1,0 +1,39 @@
+{
+  "generatedWith": {
+    "codefend": "3.2.1",
+    "rollupPlugin": "3.2.2",
+    "webpackPlugin": "3.2.2",
+    "rollup": "4.68.8",
+    "vite": "8.3.8",
+    "webpack": "5.113.0"
+  },
+  "previews": [
+    {
+      "name": "rollup",
+      "preview": "rollup/bundle.cjs",
+      "kind": "full-bundle",
+      "expectedOutput": "5",
+      "sha256": "8af05982c0045522b627ec46261c70b54f431c13073f4d044ce1a8079475c0a0",
+      "sourcePage": "examples/rollup.md",
+      "sourceSha256": "fa71fc7738ca0c7e37ffddcd9efb199fbc19e87ba1033b3557c77bb9dd65a88f"
+    },
+    {
+      "name": "vite",
+      "preview": "vite/application.js",
+      "kind": "application-excerpt",
+      "expectedOutput": "5",
+      "sha256": "7d2da66850e83cbc7391835b05c7458cbf61b59d23a71c5672891560c1a35ddd",
+      "sourcePage": "examples/vite.md",
+      "sourceSha256": "06aeb1bfe635f2402d48be1f288c8eb11f887e9e515e6bd7b85fc4451cc54d97"
+    },
+    {
+      "name": "webpack",
+      "preview": "webpack/bundle.cjs",
+      "kind": "full-bundle",
+      "expectedOutput": "5",
+      "sha256": "ae2293c489c32bc134602de351d1adb487ae3e00a1e22ad03e190928ce27753f",
+      "sourcePage": "examples/webpack.md",
+      "sourceSha256": "802790c76d90a39d802c3c348fd74f7005233c6e5144bd73f79f1c8b7821fa70"
+    }
+  ]
+}

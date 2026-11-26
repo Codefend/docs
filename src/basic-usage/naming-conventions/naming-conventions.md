@@ -1,24 +1,12 @@
-# Naming Conventions
+# Naming conventions
 
-<b><u>The primary and crucial requirement </u></b> for Codefend is that you, as a programmer, <b>follow the following naming conventions</b>:
+Codefend selects text using regular expressions. Its built-in conventions cover:
 
-- [Folders and Files Naming Convention](folders-files-naming-convention)
-- [Code Naming Convention](code-naming-convention)
+- [Code names](code-naming-convention), such as `l_temperature` and `f_readSensor`.
+- [Folder and file names](folders-files-naming-convention), such as `pkg-source` and `file-sensor`.
 
-By adhering to this convention, Codefend's parser can successfully detect these elements across various programming languages and obfuscate them effectively, ensuring comprehensive protection.
+Choose `codeOnly`, `fileOnly`, or `default` in the [parser settings](/advanced-usage/parser/overview) to select the corresponding rules. All selected rules operate on both source contents and path text. For example, `codeOnly` can still match an underscore name in a filename; it does not guarantee that every path is preserved.
 
-:::tip Only Folders and Files naming convention
-If you have an existing project and prefer not to make significant changes, you can opt to apply the naming convention only to the folders, file names, and their corresponding imports. This way, the structure of your project will be obfuscated while the code remains intact. [Learn more](folders-files-naming-convention).
-:::
+Mark names you own. Preserve names required by libraries, entry points, external APIs, serialized data, or other systems outside the transformed project. The [Arduino example](/examples/arduino) demonstrates keeping required sketch names and API calls unchanged.
 
-:::tip Only Code naming convention
-Alternatively, you can choose to strictly follow the naming convention for the code itself, ensuring that the code is obfuscated without altering the folder and file names. [Learn more](code-naming-convention).
-:::
-
-:::tip Maximum Security
-For the highest level of protection, it is advisable to implement both approaches simultaneously - applying the naming convention to both the code and the folders/file names. This comprehensive approach will provide maximum security for your project.
-:::
-
-:::tip Want to change the naming convention?
-While we recommend using the default naming convention, you also have the option to create your own custom naming convention. [Learn more](../../advanced-usage/parser/custom-naming-convention.md).
-:::
+You can define a [custom naming convention](/advanced-usage/parser/custom-naming-convention) when the built-in rules select too much. Test both transformed names and names that must remain unchanged. Renaming more text does not establish stronger security or guarantee a working program.
