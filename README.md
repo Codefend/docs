@@ -2,7 +2,11 @@
 
 Guides and examples for [Codefend](https://www.npmjs.com/package/codefend), published at [codefend.github.io/docs](https://codefend.github.io/docs/).
 
-The [example index](src/examples/list.md) covers JavaScript/TypeScript, Python, C#, Java, C/C++, Go, Rust, PHP, Ruby, Kotlin, Swift, Dart, R, Lua, SQL, Bash, PowerShell, and HTML/CSS. It also links the Arduino and Vite/Rollup/Webpack build guides.
+The [example index](src/examples/list.md) covers JavaScript/TypeScript, Python, C#, Java, C/C++, Go, Rust, PHP, Ruby, Kotlin, Swift, Dart, R, Lua, SQL, Bash, PowerShell, and HTML/CSS. It also links the Arduino, Vite, esbuild, Rollup, and Webpack build guides.
+
+Bundler integrations are available through [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend), [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend), [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend), and [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend). The [Vite guide](src/examples/vite.md) uses the dedicated Vite plugin, which runs automatically during production builds. The [esbuild guide](src/examples/esbuild.md) builds and executes a two-module JavaScript example.
+
+For an existing project, use the [AI migration guide](src/basic-usage/naming-conventions/ai-assisted-migration.md) and its copyable prompt to adopt Codefend's code naming conventions.
 
 ## Development
 

@@ -66,7 +66,7 @@ The original and generated TypeScript compile into separate build directories. T
 
 Keep exported APIs, property keys, framework hooks, decorator metadata, and runtime data formats stable. TypeScript types do not protect a renamed JSON field from breaking a server contract. If you emit declarations for consumers, verify that the published declarations and JavaScript expose the same intended API.
 
-Codefend uses text matching, not the TypeScript symbol table, and it does not provide a source map for its replacements. Compile and run representative generated code; assess debugging/source-map needs separately. For bundler-based projects, see [Vite](/examples/vite), [Rollup](/examples/rollup), or [Webpack](/examples/webpack), and read [current limitations](/distribution/troubleshooting).
+Codefend uses text matching, not the TypeScript symbol table, and it does not provide a source map for its replacements. Compile and run representative generated code; assess debugging/source-map needs separately. For bundler-based projects, see [Vite](/examples/vite), [esbuild](/examples/esbuild), [Rollup](/examples/rollup), or [Webpack](/examples/webpack), and read [current limitations](/distribution/troubleshooting).
 
 ## Add Codefend to your workflow
 

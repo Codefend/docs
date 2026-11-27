@@ -17,7 +17,7 @@ Original source → Codefend → Your uglifier or obfuscator → Final output
 
 This gives you two layers when both tools change names or otherwise obfuscate the code. Removing spaces alone makes a file smaller; it does not add another layer of name changes. Tools such as [Terser](https://github.com/terser/terser#command-line-usage) and [UglifyJS](https://github.com/mishoo/UglifyJS#usage) have separate options for compression and name mangling.
 
-For a CLI workflow, generate the source first, then point your normal build at the generated directory. For a bundler project, keep the Codefend plugin in your existing configuration. The [Vite](/examples/vite), [Rollup](/examples/rollup), and [Webpack](/examples/webpack) guides show where it runs. Check the order of your plugins and minifier before adding another step.
+For a CLI workflow, generate the source first, then point your normal build at the generated directory. For a bundler project, keep the Codefend plugin in your existing configuration. The [Vite](/examples/vite), [esbuild](/examples/esbuild), [Rollup](/examples/rollup), and [Webpack](/examples/webpack) guides show where it runs. Check the order of your plugins and minifier before adding another step.
 
 Use tools that support your language and target. A JavaScript uglifier does not process an Arduino C++ sketch; compile that sketch with its normal toolchain.
 

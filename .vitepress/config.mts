@@ -74,6 +74,10 @@ export default defineConfig({
                 text: "Code Naming Convention",
                 link: "/basic-usage/naming-conventions/code-naming-convention",
               },
+              {
+                text: "Adopt Naming Conventions with AI",
+                link: "/basic-usage/naming-conventions/ai-assisted-migration",
+              },
             ],
           },
           { text: "Obfuscation", link: "/basic-usage/obfuscation" },
@@ -171,6 +175,7 @@ export default defineConfig({
           { text: "PowerShell", link: "/examples/powershell" },
           { text: "HTML and CSS", link: "/examples/html-css" },
           { text: "Vite", link: "/examples/vite" },
+          { text: "esbuild", link: "/examples/esbuild" },
           { text: "Rollup", link: "/examples/rollup" },
           { text: "Webpack", link: "/examples/webpack" },
         ],
