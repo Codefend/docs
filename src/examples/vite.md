@@ -11,7 +11,7 @@ The plugin uses the `transform` hook after framework transforms and preserves Vi
 
 ## 1. Install the plugin
 
-The plugin supports Vite 6.4.6 and newer within Vite 6, 7, and 8, and requires Node.js 18 or newer. Use a Node.js version supported by your Vite release. In an existing Vite project, run:
+The plugin supports Vite 6.4.6 and newer within Vite 6, 7, and 8, and requires Node.js 18 or newer. Vite's own Node.js requirements also apply. In an existing Vite project, run:
 
 ```sh
 npm install --save-dev vite-plugin-codefend
