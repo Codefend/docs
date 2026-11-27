@@ -4,6 +4,8 @@ Guides and examples for [Codefend](https://www.npmjs.com/package/codefend), publ
 
 The [example index](src/examples/list.md) covers JavaScript/TypeScript, Python, C#, Java, C/C++, Go, Rust, PHP, Ruby, Kotlin, Swift, Dart, R, Lua, SQL, Bash, PowerShell, and HTML/CSS. It also links the Arduino and Vite/Rollup/Webpack build guides.
 
+Bundler integrations are available through [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend), [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend), and [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend). The [Vite guide](src/examples/vite.md) uses the dedicated Vite plugin, which runs automatically during production builds.
+
 ## Development
 
 Use Node.js 22.18 or later. CI uses Node.js 24. This requirement belongs to the documentation tools, including CSpell; Codefend's runtime requirement remains Node.js 18 or later.

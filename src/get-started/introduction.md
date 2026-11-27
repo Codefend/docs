@@ -1,6 +1,6 @@
 # Codefend
 
-Codefend renames selected words in source text and file paths using a naming convention. Its CLI creates a generated source directory that you can inspect, test, and build. Rollup and Webpack plugins integrate the same engine into JavaScript builds.
+Codefend renames selected words in source text and file paths using a naming convention. Its CLI creates a generated source directory that you can inspect, test, and build. [Vite](https://www.npmjs.com/package/vite-plugin-codefend), [Rollup](https://www.npmjs.com/package/rollup-plugin-codefend), and [Webpack](https://www.npmjs.com/package/webpack-plugin-codefend) plugins integrate the same engine into JavaScript builds.
 
 You choose which names to mark, such as `l_temperature` or `f_calculateTotal`. Codefend replaces matching names with a configured prefix, explicit replacements, or words from a pool. The engine uses regular expressions rather than a language-specific syntax tree, so the same conventions can be applied to different text-based languages.
 

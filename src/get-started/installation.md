@@ -62,6 +62,12 @@ Then run `npm run obfuscate`. This is a `package.json` fragment to merge into yo
 
 Add obfuscation before compiling, packaging, or distributing the generated source, then run the generated program's tests. For a repeatable CI setup, even a non-Node.js project can choose a local development dependency and lockfile, install it with `npm ci`, and run `npx codefend --obfuscate`.
 
-For bundler integrations, follow [Vite](/examples/vite), [Rollup](/examples/rollup), or [Webpack](/examples/webpack). Keep their plugins local so the build configuration can import them.
+For bundler integrations, install the corresponding plugin locally so the build configuration can import it:
+
+| Bundler | Plugin | Setup guide |
+| ------- | ------ | ----------- |
+| Vite | [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) | [Vite guide](/examples/vite) |
+| Rollup | [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) | [Rollup guide](/examples/rollup) |
+| Webpack | [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) | [Webpack guide](/examples/webpack) |
 
 Your bundler may require newer Node.js versions independently of Codefend. Use an actively maintained Node.js release for development. Contributors running this documentation site's tools need Node.js `22.18.0` or newer; that is separate from Codefend's runtime requirement.
