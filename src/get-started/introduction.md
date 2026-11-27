@@ -7,6 +7,7 @@ You choose which names to mark, such as `l_temperature` or `f_calculateTotal`. C
 ## Where to start
 
 - [Install Codefend](installation) and understand [how it works](how-it-works).
+- [Adopt naming conventions with AI](/basic-usage/naming-conventions/ai-assisted-migration) in an existing project using a copyable migration prompt.
 - Try the [Node.js example](/examples/nodejs) for source generation.
 - Follow the [Arduino example](/examples/arduino) for a sketch workflow.
 - Integrate it with [Vite](/examples/vite), [Rollup](/examples/rollup), or [Webpack](/examples/webpack).

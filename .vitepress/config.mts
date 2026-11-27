@@ -74,6 +74,10 @@ export default defineConfig({
                 text: "Code Naming Convention",
                 link: "/basic-usage/naming-conventions/code-naming-convention",
               },
+              {
+                text: "Adopt Naming Conventions with AI",
+                link: "/basic-usage/naming-conventions/ai-assisted-migration",
+              },
             ],
           },
           { text: "Obfuscation", link: "/basic-usage/obfuscation" },

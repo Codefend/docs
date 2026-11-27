@@ -6,6 +6,8 @@ The [example index](src/examples/list.md) covers JavaScript/TypeScript, Python, 
 
 Bundler integrations are available through [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend), [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend), and [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend). The [Vite guide](src/examples/vite.md) uses the dedicated Vite plugin, which runs automatically during production builds.
 
+For an existing project, use the [AI migration guide](src/basic-usage/naming-conventions/ai-assisted-migration.md) and its copyable prompt to adopt Codefend's code naming conventions.
+
 ## Development
 
 Use Node.js 22.18 or later. CI uses Node.js 24. This requirement belongs to the documentation tools, including CSpell; Codefend's runtime requirement remains Node.js 18 or later.
