@@ -58,7 +58,7 @@ Hello, Ada Lovelace!
 
 The output remains named `index.cjs`; its selected identifiers change. Treat generated identifier numbers as implementation details, rather than an API contract.
 
-For a larger application, verify imports, public exports, string-key references, and runtime behavior. Keep binary assets outside a CLI input tree: current Codefend reads copied files as text. See [troubleshooting](/distribution/troubleshooting), or use the [Vite](/examples/vite), [Rollup](/examples/rollup), or [Webpack](/examples/webpack) adapter for a bundler-based project.
+For a larger application, verify imports, public exports, string-key references, and runtime behavior. Keep binary assets outside a CLI input tree: current Codefend reads copied files as text. See [troubleshooting](/distribution/troubleshooting), or use the [Vite](/examples/vite), [esbuild](/examples/esbuild), [Rollup](/examples/rollup), or [Webpack](/examples/webpack) adapter for a bundler-based project.
 
 ## Add Codefend to your workflow
 

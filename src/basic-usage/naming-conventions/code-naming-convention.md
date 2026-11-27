@@ -44,4 +44,6 @@ Codefend does not infer those roles. All of these names match the same underscor
 
 The current rule and replacement engine can match parts of longer names. Use consistent casing, preserve external interfaces, and test both selected names and names that should remain unchanged. `codeOnly` also operates on path text; it does not guarantee filenames remain unchanged.
 
+For an existing project, use the [AI migration prompt](./ai-assisted-migration) to ask a coding assistant to adopt these conventions while preserving external interfaces and updating references.
+
 See the [Arduino](/examples/arduino) and [JavaScript bundler examples](/examples/vite) for concrete naming choices, or define a [custom naming convention](/advanced-usage/parser/custom-naming-convention).
