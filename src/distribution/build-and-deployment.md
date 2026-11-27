@@ -17,7 +17,7 @@ Your source → Codefend → Build and test → Package or deploy
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Arduino, C#, Python, and other projects outside Node.js | Install the CLI globally and run `codefend --obfuscate` before your normal build or tests. |
 | Node.js or TypeScript                                   | Install locally and use `npx codefend --obfuscate` or an npm script.                       |
-| Vite, Rollup, or Webpack                                | Keep the plugin in your existing configuration and run your usual production build.        |
+| Vite, esbuild, Rollup, or Webpack                        | Keep the plugin in your existing configuration and run your usual production build.        |
 
 See [installation](/get-started/installation) for the commands and [examples](/examples/list) for complete projects.
 
@@ -76,7 +76,7 @@ npm ci
 npm run build
 ```
 
-Test the generated bundle before deploying it. Keep the other framework plugins and settings your project needs. The [Vite](/examples/vite), [Rollup](/examples/rollup), and [Webpack](/examples/webpack) guides show full configurations and workflow examples.
+Test the generated bundle before deploying it. Keep the other framework plugins and settings your project needs. The [Vite](/examples/vite), [esbuild](/examples/esbuild), [Rollup](/examples/rollup), and [Webpack](/examples/webpack) guides show full configurations and workflow examples.
 
 Your existing uglifier or minifier can stay in the build. Check its order and test the final result; see [two layers of obfuscation](/advanced-usage/multi-layer-obfuscation).
 

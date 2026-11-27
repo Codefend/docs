@@ -175,6 +175,7 @@ export default defineConfig({
           { text: "PowerShell", link: "/examples/powershell" },
           { text: "HTML and CSS", link: "/examples/html-css" },
           { text: "Vite", link: "/examples/vite" },
+          { text: "esbuild", link: "/examples/esbuild" },
           { text: "Rollup", link: "/examples/rollup" },
           { text: "Webpack", link: "/examples/webpack" },
         ],

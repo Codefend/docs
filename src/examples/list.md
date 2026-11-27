@@ -1,6 +1,6 @@
 ---
 title: Codefend language and build examples
-description: Source obfuscation examples for C#, C++, Python, Java, JavaScript, TypeScript, Go, Rust, and more, plus Arduino and Vite, Rollup, and Webpack builds.
+description: Source obfuscation examples for C#, C++, Python, Java, JavaScript, TypeScript, Go, Rust, and more, plus Arduino, Vite, esbuild, Rollup, and Webpack builds.
 ---
 
 # Examples
@@ -49,6 +49,7 @@ The automated docs checks verify each language fixture's actual Codefend transfo
 | Build tool                   | Guide                                                                         |
 | ---------------------------- | ----------------------------------------------------------------------------- |
 | [Vite](/examples/vite)       | Use the dedicated Vite plugin, which runs automatically during production builds. |
+| [esbuild](/examples/esbuild) | Build and execute two JavaScript modules with esbuild-plugin-codefend. |
 | [Rollup](/examples/rollup)   | Bundle a two-module JavaScript example.                                       |
 | [Webpack](/examples/webpack) | Process a production JavaScript bundle with the official plugin.              |
 

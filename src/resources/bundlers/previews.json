@@ -6,7 +6,9 @@
     "webpackPlugin": "3.2.2",
     "rollup": "4.68.8",
     "vite": "8.4.0",
-    "webpack": "5.113.0"
+    "webpack": "5.113.0",
+    "esbuildPlugin": "3.2.2",
+    "esbuild": "0.28.2"
   },
   "previews": [
     {
@@ -35,6 +37,15 @@
       "sha256": "ae2293c489c32bc134602de351d1adb487ae3e00a1e22ad03e190928ce27753f",
       "sourcePage": "examples/webpack.md",
       "sourceSha256": "802790c76d90a39d802c3c348fd74f7005233c6e5144bd73f79f1c8b7821fa70"
+    },
+    {
+      "name": "esbuild",
+      "preview": "esbuild/bundle.cjs",
+      "kind": "full-bundle",
+      "expectedOutput": "5",
+      "sha256": "32e2a53d65c9cdc739b992fb8a6f87080273ba6c1b4400e518e5702224c88a61",
+      "sourcePage": "examples/esbuild.md",
+      "sourceSha256": "79d61f1ba5fc55ab1137db77275530891624122c79a0ea7b971c724322c719ad"
     }
   ]
 }

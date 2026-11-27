@@ -28,7 +28,7 @@ features:
     link: /basic-usage/naming-conventions/ai-assisted-migration
     linkText: Get the AI migration prompt
   - title: Build integrations
-    details: Add Codefend to your Vite, Rollup, or Webpack build. Keep the tools and plugins your project already uses.
+    details: Add Codefend to your Vite, esbuild, Rollup, or Webpack build. Keep the tools and plugins your project already uses.
     link: /examples/list#bundlers
     linkText: See build guides
   - title: Two layers of obfuscation

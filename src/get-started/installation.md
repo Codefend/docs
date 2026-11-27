@@ -8,7 +8,7 @@ Codefend requires Node.js `18.0.0` or newer on your development computer, includ
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | Arduino, C#, C/C++, Python, Java, or another project without npm dependencies | Install the Codefend CLI globally once and use `codefend`.                                    |
 | A Node.js or TypeScript project                                               | Install Codefend locally as a development dependency and use `npx codefend` or an npm script. |
-| A Vite, Rollup, or Webpack build                                              | Install the corresponding plugin locally in that project.                                     |
+| A Vite, esbuild, Rollup, or Webpack build                                     | Install the corresponding plugin locally in that project.                                     |
 
 ### Other languages: install globally
 
@@ -67,6 +67,7 @@ For bundler integrations, install the corresponding plugin locally so the build 
 | Bundler | Plugin | Setup guide |
 | ------- | ------ | ----------- |
 | Vite | [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) | [Vite guide](/examples/vite) |
+| esbuild | [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend) | [esbuild guide](/examples/esbuild) |
 | Rollup | [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) | [Rollup guide](/examples/rollup) |
 | Webpack | [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) | [Webpack guide](/examples/webpack) |
 

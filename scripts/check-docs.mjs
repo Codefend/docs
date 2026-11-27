@@ -84,6 +84,7 @@ for (const route of [
   "arduino",
   "nodejs",
   "vite",
+  "esbuild",
   "rollup",
   "webpack",
   ...languageRoutes,
