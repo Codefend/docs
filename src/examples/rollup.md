@@ -5,7 +5,7 @@ description: Build and execute a two-module JavaScript project using rollup-plug
 
 # Rollup code obfuscation
 
-Requires version **3.3.0 or later** of the plugin. This guide selects the recommended [`m_` parser preset](/advanced-usage/parser/presets).
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
 
 The Rollup plugin runs Codefend while source modules are transformed. This example bundles two JavaScript modules into a CommonJS file, then runs that file with Node.js.
 

@@ -5,7 +5,7 @@ description: Add Codefend to a Vite production build with vite-plugin-codefend, 
 
 # Vite code obfuscation
 
-Requires version **3.3.0 or later** of the plugin. This guide selects the recommended [`m_` parser preset](/advanced-usage/parser/presets).
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
 
 Use [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) in a Vite build to rename source names that follow Codefend's naming convention. The plugin automatically runs only during builds, keeping the development server and HMR unchanged.
 

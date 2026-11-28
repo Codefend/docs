@@ -5,7 +5,7 @@ description: Configure webpack-plugin-codefend for a production-only Webpack 5 b
 
 # Webpack code obfuscation
 
-Requires version **3.3.0 or later** of the plugin. This guide selects the recommended [`m_` parser preset](/advanced-usage/parser/presets).
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
 
 Use `webpack-plugin-codefend` to apply Codefend during Webpack's asset-processing stage. This JavaScript-only example targets Node.js so you can execute and check the emitted bundle directly.
 

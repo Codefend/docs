@@ -10,7 +10,7 @@ Create it once, then edit it for your source layout and naming convention. In Co
 
 The generated configuration includes source/output settings, transformations, parser selection, debugging settings, and generated `__meta` information. See the [configuration reference](/references/configuration).
 
-For a first source-only project, use separate input and output directories under the project root. For example, `source` contains your text sources and `generated` is disposable output:
+For a first source-only project, use separate input and output directories under the project root. For example, `source` contains your text sources and `generated` is disposable output. Select the recommended [`startWithMAndUnderscore` preset](/advanced-usage/parser/presets) for application-owned names marked with `m_` in Codefend 3.3.0 or later:
 
 ```json
 {
@@ -26,7 +26,7 @@ For a first source-only project, use separate input and output directories under
     "pool": []
   },
   "parser": {
-    "name": "codeOnly"
+    "name": "startWithMAndUnderscore"
   },
   "debug": {
     "stats": true,

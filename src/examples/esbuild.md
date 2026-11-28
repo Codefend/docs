@@ -5,7 +5,7 @@ description: Add esbuild-plugin-codefend to a JavaScript build, keep imports and
 
 # esbuild code obfuscation
 
-Requires version **3.3.0 or later** of the plugin. This guide selects the recommended [`m_` parser preset](/advanced-usage/parser/presets).
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
 
 Use [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend) to apply Codefend while esbuild loads source modules. This example builds two JavaScript modules into a CommonJS bundle so you can execute and check the result with Node.js.
 
@@ -61,7 +61,7 @@ await build({
 });
 ```
 
-The plugin accepts `parser.name`, `transformation`, and `debug` options. This example selects `startWithMAndUnderscore`; `codeOnly` remains the default when parser settings are omitted. For example, `codefend({ debug: { stats: false } })` disables its build statistics.
+The plugin accepts `parser.name`, `transformation`, and `debug` options. This example selects `startWithMAndUnderscore`; `codeOnly` remains the default when parser settings are omitted. Use `codefend({ parser: { name: "startWithMAndUnderscore" }, debug: { stats: false } })` to keep the recommended selection and disable build statistics.
 
 esbuild's JavaScript build API loads the plugin. Its command-line interface, `buildSync`, and `transform` API do not load plugins. This example leaves minification disabled through esbuild's defaults so you can inspect the renamed source.
 
