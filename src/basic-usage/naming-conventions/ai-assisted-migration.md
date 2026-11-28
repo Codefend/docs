@@ -93,6 +93,19 @@ console.log(m_calculateTotal({ unitPrice: 5, quantity: 2 }).total);
 
 Both versions print `10`. The function, parameter, and local variable are renamed together. The input keys `unitPrice` and `quantity`, and the returned key `total`, remain stable. This example assumes the function and its caller are internal to the same project.
 
+After running Codefend with the `startWithMAndUnderscore` configuration above, a fresh runtime using the default `Ox` replacement prefix produces:
+
+```js
+function Ox0(Ox1) {
+  const Ox2 = Ox1.unitPrice * Ox1.quantity;
+  return { total: Ox2 };
+}
+
+console.log(Ox0({ unitPrice: 5, quantity: 2 }).total);
+```
+
+All three versions print `10`, and the external data keys stay unchanged. Keep the readable `m_` version as maintained source; Codefend creates the `Ox...` names in generated output. Exact generated identifiers can vary with the configuration and processing order.
+
 ## Check the generated result
 
 An AI refactor prepares source names; it does not establish that every selected name can be obfuscated safely. Review generated code for public names, collisions, matching strings, and shared references. The `m_` preset reduces selection of unrelated underscore names; it does not determine which APIs or data keys are external.
