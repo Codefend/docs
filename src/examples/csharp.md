@@ -5,6 +5,8 @@ description: Rename application-owned C# helpers with Codefend and run both sour
 
 # Obfuscate C# source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Codefend can rename selected identifiers in C# source before compilation. This example calculates an order total, keeping `Program`, `Main`, and `Console.WriteLine` unchanged. It transforms source text; it is not a .NET assembly obfuscator.
 
 ## 1. Create the source
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `75`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Only the private helper and its parameters use `l_`. Preserve public entry points and library APIs. This standalone .NET 10 example needs no `.csproj`, `package.json`, or npm project initialization.
+Only the private helper and its parameters use `m_`. Preserve public entry points and library APIs. This standalone .NET 10 example needs no `.csproj`, `package.json`, or npm project initialization.
 
 ## 2. Configure Codefend
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` alongside the `source` directory:
 
 <<< @/resources/languages/csharp/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom regex selects this example's `l_` names. Plain `Program.cs` does not match the rule, so its filename stays unchanged. The default empty pool uses generated `Ox` names.
+Plain `Program.cs` does not match the rule, so its filename stays unchanged. The default empty pool uses generated `Ox` names.
 
 Keep `source` text-only and reserve sibling `release` for generated files: Codefend removes an existing output directory. See [output-directory guidance](/basic-usage/obfuscation).
 

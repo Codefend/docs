@@ -1,15 +1,15 @@
 #include <stdio.h>
 
-static int l_total(const int *l_values, int l_count) {
-    int l_sum = 0;
-    for (int l_index = 0; l_index < l_count; ++l_index) {
-        l_sum += l_values[l_index];
+static int m_total(const int *m_values, int m_count) {
+    int m_sum = 0;
+    for (int m_index = 0; m_index < m_count; ++m_index) {
+        m_sum += m_values[m_index];
     }
-    return l_sum;
+    return m_sum;
 }
 
 int main(void) {
-    const int l_values[] = {12, 18, 12};
-    printf("%d\n", l_total(l_values, 3));
+    const int m_values[] = {12, 18, 12};
+    printf("%d\n", m_total(m_values, 3));
     return 0;
 }

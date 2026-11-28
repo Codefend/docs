@@ -5,6 +5,8 @@ description: Run a small Node.js CommonJS program before and after Codefend obfu
 
 # Obfuscate a Node.js program
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example uses Codefend's CLI to rename identifiers in a small CommonJS program. Node.js runs on your computer; Codefend produces another source file for Node.js to execute.
 
 Use Node.js 18 or later for Codefend. This is the core package's runtime requirement; documentation tooling and bundlers can require newer Node.js versions.
@@ -30,7 +32,7 @@ With the configuration in the next step, Codefend produces:
 
 The program should still print `Hello, Ada Lovelace!`. Generated names can change with the source or Codefend version.
 
-The `l_` convention marks the identifiers we own. `console.log` is a Node.js API and stays unchanged. The `.cjs` extension keeps the example's CommonJS format explicit.
+The `m_` convention marks the identifiers we own. `console.log` is a Node.js API and stays unchanged. The `.cjs` extension keeps the example's CommonJS format explicit.
 
 ## 2. Configure a separate output
 
@@ -38,7 +40,7 @@ Create `.codefendrc.json` in the project root, alongside `source`:
 
 <<< @/resources/nodejs/standalone/codefend.config.json
 
-`codeOnly` selects the underscore naming rule and also applies to paths. The plain `index.cjs` filename does not match that rule, so this example preserves it. The default empty pool uses generated prefix-and-sequence names. `release` is a disposable sibling of `source`: it must contain no original files or other valuable data because Codefend removes an existing output directory before writing.
+`startWithMAndUnderscore` selects the explicit `m_` convention and also applies to paths. The plain `index.cjs` filename does not match that rule, so this example preserves it. The default empty pool uses generated prefix-and-sequence names. `release` is a disposable sibling of `source`: it must contain no original files or other valuable data because Codefend removes an existing output directory before writing.
 
 ## 3. Compare the result
 

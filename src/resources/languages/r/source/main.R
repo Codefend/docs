@@ -1,6 +1,6 @@
-l_total <- function(l_values) {
-  l_sum <- sum(l_values)
-  l_sum
+m_total <- function(m_values) {
+  m_sum <- sum(m_values)
+  m_sum
 }
 
-cat(l_total(c(12L, 18L, 12L)), "\n", sep = "")
+cat(m_total(c(12L, 18L, 12L)), "\n", sep = "")

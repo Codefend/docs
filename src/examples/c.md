@@ -5,6 +5,8 @@ description: Obfuscate selected application identifiers in a C program with Code
 
 # Obfuscate a C program
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example renames a private helper and its local variables before compiling a C program. It keeps `main`, library calls, and filenames unchanged. It transforms source text, not an existing executable.
 
 ## 1. Create the program
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-The helper totals three values and prints `42`. Only names we own use the `l_` convention. Keep `main`, `printf`, standard headers, and any external library APIs unchanged.
+The helper totals three values and prints `42`. Only names we own use the `m_` convention. Keep `main`, `printf`, standard headers, and any external library APIs unchanged.
 
 ## 2. Configure selective naming
 
@@ -35,9 +37,9 @@ Save this as `.codefendrc.json` beside `source`:
 
 <<< @/resources/languages/c/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom regex selects this example's `l_` names. A narrow rule avoids treating unrelated underscore names in headers or macros as application identifiers. The default empty pool uses generated names with the configured prefix.
+A narrow rule avoids treating unrelated underscore names in headers or macros as application identifiers. The default empty pool uses generated names with the configured prefix.
 
 `release` is a disposable sibling of `source`: Codefend removes an existing output directory. Keep this input tree source-only and place object files, executables, libraries, and other binary assets outside it. See [output-directory guidance](/basic-usage/obfuscation).
 
@@ -67,7 +69,7 @@ Inspect `release/main.c` to confirm that selected names changed while the entry 
 - Preserve required header/include paths and update all references when deliberately renaming an application symbol.
 - Keep preprocessing contracts, public macros, compiler attributes, and library identifiers unchanged unless you control every consumer.
 - Test cross-file references and compile all generated translation units. This example uses one source file and the default empty pool; a non-empty pool has current cross-call allocation limitations.
-- The custom discovery regex does not make replacement syntax-aware. Review strings, case variants, and longer names containing a selected identifier; see [current limitations](/distribution/troubleshooting).
+- The `startWithMAndUnderscore` preset does not make replacement syntax-aware. Review matching strings, external interfaces, and generated-name collisions; see [current limitations](/distribution/troubleshooting).
 
 For an embedded C++ workflow with required framework entry points, see the [Arduino guide](/examples/arduino).
 

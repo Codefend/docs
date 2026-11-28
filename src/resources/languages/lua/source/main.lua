@@ -1,9 +1,9 @@
-local function l_total(l_values)
-  local l_sum = 0
-  for _, l_value in ipairs(l_values) do
-    l_sum = l_sum + l_value
+local function m_total(m_values)
+  local m_sum = 0
+  for _, m_value in ipairs(m_values) do
+    m_sum = m_sum + m_value
   end
-  return l_sum
+  return m_sum
 end
 
-print(l_total({12, 18, 12}))
+print(m_total({12, 18, 12}))

@@ -5,6 +5,8 @@ description: Add esbuild-plugin-codefend to a JavaScript build, keep imports and
 
 # esbuild code obfuscation
 
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
+
 Use [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend) to apply Codefend while esbuild loads source modules. This example builds two JavaScript modules into a CommonJS bundle so you can execute and check the result with Node.js.
 
 ## 1. Install esbuild and the plugin
@@ -12,7 +14,7 @@ Use [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codef
 Start in a new directory with `npm init -y`, or use an existing project:
 
 ```sh
-npm install --save-dev esbuild esbuild-plugin-codefend
+npm install --save-dev esbuild esbuild-plugin-codefend@^3.3.0
 ```
 
 In a project that already has esbuild, only the plugin needs adding. It supports esbuild 0.25.12 and newer within esbuild 0.25, 0.26, 0.27, and 0.28.
@@ -20,15 +22,15 @@ In a project that already has esbuild, only the plugin needs adding. It supports
 ## 2. Create two source modules
 
 ```js [src/math.js]
-export function l_add(l_left, l_right) {
-  return l_left + l_right;
+export function m_add(m_left, m_right) {
+  return m_left + m_right;
 }
 ```
 
 ```js [src/main.js]
-import { l_add } from "./math.js";
+import { m_add } from "./math.js";
 
-console.log(l_add(2, 3));
+console.log(m_add(2, 3));
 ```
 
 ### Expected obfuscated source
@@ -37,7 +39,7 @@ With the configuration below, esbuild emits this bundle at `dist/bundle.cjs`:
 
 <<< @/resources/bundlers/esbuild/bundle.cjs{js}
 
-This output comes from an actual build with the published plugin. It prints `5`; Codefend replaces the application's `l_` names while preserving `console.log`. Exact generated names and formatting can vary with the input and tool versions.
+This output comes from an actual build with the configuration below. It prints `5`; Codefend replaces the application's `m_` names while preserving `console.log`. Exact generated names and formatting can vary with the input and tool versions.
 
 The same mapping is used for the function's export and import, so the two modules continue to work together. Keep names required by external consumers unchanged.
 
@@ -55,11 +57,11 @@ await build({
   platform: "node",
   format: "cjs",
   outfile: "dist/bundle.cjs",
-  plugins: [codefend()],
+  plugins: [codefend({ parser: { name: "startWithMAndUnderscore" } })],
 });
 ```
 
-The plugin uses the built-in `codeOnly` parser and accepts `transformation` and `debug` options. For example, `codefend({ debug: { stats: false } })` disables its build statistics.
+The plugin accepts `parser.name`, `transformation`, and `debug` options. This example selects `startWithMAndUnderscore`; `codeOnly` remains the default when parser settings are omitted. Use `codefend({ parser: { name: "startWithMAndUnderscore" }, debug: { stats: false } })` to keep the recommended selection and disable build statistics.
 
 esbuild's JavaScript build API loads the plugin. Its command-line interface, `buildSync`, and `transform` API do not load plugins. This example leaves minification disabled through esbuild's defaults so you can inspect the renamed source.
 
@@ -76,7 +78,7 @@ The bundle should print:
 5
 ```
 
-Inspect `dist/bundle.cjs` to confirm that the example's `l_` names were replaced. The source files under `src` retain their readable names.
+Inspect `dist/bundle.cjs` to confirm that the example's `m_` names were replaced. The source files under `src` retain their readable names.
 
 ## Add this to your workflow
 

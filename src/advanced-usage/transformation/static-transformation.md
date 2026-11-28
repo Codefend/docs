@@ -8,8 +8,8 @@ Merge this fragment into your configuration:
 {
   "transformation": {
     "static": [
-      { "from": "l_name", "to": "fieldA" },
-      { "from": "l_age", "to": "fieldB" }
+      { "from": "m_name", "to": "fieldA" },
+      { "from": "m_age", "to": "fieldB" }
     ]
   }
 }
@@ -18,8 +18,8 @@ Merge this fragment into your configuration:
 Input:
 
 ```js
-const user = { l_name: "Ada", l_age: 37 };
-console.log(user.l_name);
+const user = { m_name: "Ada", m_age: 37 };
+console.log(user.m_name);
 ```
 
 Output:
@@ -35,6 +35,6 @@ An explicit mapping is added to the replacement map even if the discovery parser
 
 ## Shared data formats
 
-If client and server source both use `l_name` and the same static mapping, they can agree on `fieldA` in their generated code. This changes the field name; it does not encrypt its value, authenticate the request, or protect network traffic. Third-party clients and stored data may still depend on the original field names, so treat such a change as a data-contract migration.
+If client and server source both use `m_name` and the same static mapping, they can agree on `fieldA` in their generated code. This changes the field name; it does not encrypt its value, authenticate the request, or protect network traffic. Third-party clients and stored data may still depend on the original field names, so treat such a change as a data-contract migration.
 
 Keep transport security and authentication in your normal application stack. Codefend does not replace either.

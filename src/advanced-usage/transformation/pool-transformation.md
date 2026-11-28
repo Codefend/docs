@@ -15,9 +15,9 @@ Configuration fragment:
 For a fresh runtime processing this snippet alone:
 
 ```js
-const l_first = 1;
-const l_other = 2;
-console.log(l_first + l_other);
+const m_first = 1;
+const m_other = 2;
+console.log(m_first + m_other);
 ```
 
 the output is:

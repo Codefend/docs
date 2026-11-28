@@ -5,6 +5,8 @@ description: Configure webpack-plugin-codefend for a production-only Webpack 5 b
 
 # Webpack code obfuscation
 
+Requires version **3.3.0 or later** of the plugin. This guide selects [`startWithMAndUnderscore`](/advanced-usage/parser/presets), which we recommend for new projects using explicit `m_` names. Its narrower selection helps preserve unrelated underscore names.
+
 Use `webpack-plugin-codefend` to apply Codefend during Webpack's asset-processing stage. This JavaScript-only example targets Node.js so you can execute and check the emitted bundle directly.
 
 ## 1. Install Webpack and the plugin
@@ -12,7 +14,7 @@ Use `webpack-plugin-codefend` to apply Codefend during Webpack's asset-processin
 Run `npm init -y` in a new project, then install:
 
 ```sh
-npm install --save-dev webpack@^5 webpack-cli webpack-plugin-codefend
+npm install --save-dev webpack@^5 webpack-cli webpack-plugin-codefend@^3.3.0
 ```
 
 Use a Node.js version supported by the installed Webpack CLI. The Codefend plugin supports Webpack 5.
@@ -20,11 +22,11 @@ Use a Node.js version supported by the installed Webpack CLI. The Codefend plugi
 ## 2. Add application code
 
 ```js [src/main.js]
-function l_add(l_left, l_right) {
-  return l_left + l_right;
+function m_add(m_left, m_right) {
+  return m_left + m_right;
 }
 
-console.log(l_add(2, 3));
+console.log(m_add(2, 3));
 ```
 
 ### Expected obfuscated source
@@ -35,7 +37,7 @@ With the production configuration below, Webpack emits this source at `dist/bund
 
 This output comes from an actual build with minification disabled. The program still prints `5`; Codefend changes the helper and parameter names, while Webpack adds its bundle wrapper. Exact generated names and wrapper formatting can vary with the input and tool versions.
 
-The `l_` names belong to the application. Leave platform APIs such as `console.log` unchanged.
+The `m_` names belong to the application. Leave platform APIs such as `console.log` unchanged.
 
 ## 3. Configure production-only obfuscation
 
@@ -56,7 +58,14 @@ module.exports = (_env, argv) => ({
   optimization: {
     minimize: false,
   },
-  plugins: argv.mode === "production" ? [new WebpackPluginCodefend()] : [],
+  plugins:
+    argv.mode === "production"
+      ? [
+          new WebpackPluginCodefend({
+            parser: { name: "startWithMAndUnderscore" },
+          }),
+        ]
+      : [],
 });
 ```
 
@@ -77,7 +86,7 @@ The bundle should print:
 5
 ```
 
-Inspect `dist/bundle.cjs` to confirm that the `l_` names were replaced. Running the same build command with `--mode development` omits the Codefend plugin.
+Inspect `dist/bundle.cjs` to confirm that the `m_` names were replaced. Running the same build command with `--mode development` omits the Codefend plugin.
 
 ## Add this to your workflow
 
@@ -103,7 +112,7 @@ Run the application's tests against the generated assets before deployment. Keep
 
 ## Integrating with a larger build
 
-The plugin processes assets available at Webpack's `PROCESS_ASSETS_STAGE_DERIVED` stage, before normal size optimization. It uses Codefend's built-in `codeOnly` parser and accepts `transformation` and `debug` settings. Webpack's `.tap()` method registers the callback; it does not provide a separate obfuscation algorithm.
+The plugin processes assets available at Webpack's `PROCESS_ASSETS_STAGE_DERIVED` stage, before normal size optimization. It accepts `parser.name`, `transformation`, and `debug` settings. This example selects `startWithMAndUnderscore`; `codeOnly` remains the default when parser settings are omitted. Webpack's `.tap()` method registers the callback; it does not provide a separate obfuscation algorithm.
 
 Keep public exports, external property names, and framework entry points stable. This example uses an empty pool; custom pools need whole-build testing because shared allocation has known limitations. Builds containing CSS, binary assets, multiple chunks, or additional asset plugins also need representative runtime and asset checks.
 

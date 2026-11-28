@@ -5,6 +5,8 @@ description: Obfuscate an Arduino C++ sketch with Codefend while preserving setu
 
 # Obfuscating an Arduino sketch
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Codefend can rename selected identifiers in Arduino C++ source before you share a sketch. This example uses a small LED sketch, keeps the Arduino entry points and APIs intact, and compiles the generated sketch with Arduino CLI.
 
 Codefend runs on your development computer. It does not add a runtime library to the Arduino board. It transforms source text; it does not encrypt firmware or protect credentials embedded in source or compiled binaries.
@@ -70,7 +72,7 @@ With the configuration in the next step, Codefend produces:
 
 The expected behavior remains an LED toggle every half second. The Arduino entry points and library APIs stay unchanged; generated identifier numbers can vary with the input.
 
-Only our application identifiers use `l_`. Keep `setup`, `loop`, `pinMode`, `digitalWrite`, `millis`, `LED_BUILTIN`, `OUTPUT`, `HIGH`, and `LOW` unchanged: they belong to the Arduino build environment or API.
+Only our application identifiers use `m_`. Keep `setup`, `loop`, `pinMode`, `digitalWrite`, `millis`, `LED_BUILTIN`, `OUTPUT`, `HIGH`, and `LOW` unchanged: they belong to the Arduino build environment or API.
 
 Compile the original before adding obfuscation to your workflow:
 
@@ -84,7 +86,7 @@ Save the following as `.codefendrc.json` in the project root:
 
 <<< @/resources/arduino/codefend.config.json
 
-The custom parser selects application names beginning with `l_` in this sketch. This is useful here because the broader `codeOnly` convention also matches underscore names such as `LED_BUILTIN`. The default transformation generates names such as `Ox0`; no additional transformation settings are needed.
+The `startWithMAndUnderscore` preset selects application names beginning with `m_` in this sketch. This is useful here because the broader `codeOnly` convention also matches underscore names such as `LED_BUILTIN`. The default transformation generates names such as `Ox0`; no additional transformation settings are needed.
 
 The plain folder and filename do not match this naming rule, so this example retains `PulseBlink/PulseBlink.ino`. Codefend also applies matching to paths; choosing a code-oriented parser alone does not guarantee that every possible filename will be preserved.
 
@@ -137,10 +139,10 @@ This example's original and generated sketches were compiled for `arduino:avr:un
 - Keep hardware entry points, interrupt callback contracts, library APIs, macro names, and externally referenced names compatible with their callers. Add the naming convention only to identifiers you control, updating all their references.
 - Use a separate generated sketch tree. Preserve matching sketch-folder/primary-file names, include paths, and any filenames required by the Arduino toolchain.
 - Before extending to several `.ino`, `.h`, or `.cpp` files, compile both trees and exercise cross-file references. In the current engine, a non-empty replacement pool can reuse or change mappings across calls; this example deliberately has one source file and the default empty pool.
-- Matching and replacement operate on text, including matching string contents and comments. Test for changes to protocol fields, serialized keys, case variants, and longer names containing a selected name. A custom discovery regex does not provide syntax-aware C++ renaming.
+- Matching and replacement operate on text, including matching string contents and comments. Test for changes to protocol fields, serialized keys, case variants, and longer names containing a selected name. The preset does not provide syntax-aware C++ renaming.
 - Source obfuscation changes how distributed source looks. It does not guarantee smaller firmware, faster execution, resistance to reverse engineering, or secrecy of embedded values. Keep the original source and required license notices when distributing derivatives.
 
-For configuration details, see [custom naming conventions](../advanced-usage/parser/custom-naming-convention.md) and [build and deployment](../distribution/build-and-deployment.md).
+For configuration details, see [parser presets](../advanced-usage/parser/presets.md) and [build and deployment](../distribution/build-and-deployment.md).
 
 ## Add Codefend to your workflow
 

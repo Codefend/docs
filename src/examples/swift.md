@@ -5,6 +5,8 @@ description: Rename selected Swift helper and parameter names before compilation
 
 # Obfuscate Swift source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This standalone Swift program calculates an order total. Codefend renames the private helper and local parameter names before the Swift compiler builds an executable.
 
 ## 1. Create the program
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `75`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Only the helper and its internal parameter names use `l_`. The `_` argument labels make the call positional. Preserve `Int`, `print`, and any APIs supplied by Swift or a framework. Top-level code is the entry point in this small program; see [A Swift Tour](https://docs.swift.org/latest/documentation/the-swift-programming-language/guidedtour/).
+Only the helper and its internal parameter names use `m_`. The `_` argument labels make the call positional. Preserve `Int`, `print`, and any APIs supplied by Swift or a framework. Top-level code is the entry point in this small program; see [A Swift Tour](https://docs.swift.org/latest/documentation/the-swift-programming-language/guidedtour/).
 
 ## 2. Configure selected names
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/swift/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom parser selects this example's `l_` names and leaves the plain `main.swift` filename unchanged. Reserve `release` for generated source: Codefend replaces its configured output directory. Keep binary products and toolchain files outside the text-only `source` tree.
+The `startWithMAndUnderscore` preset selects this example's `m_` names and leaves the plain `main.swift` filename unchanged. Reserve `release` for generated source: Codefend replaces its configured output directory. Keep binary products and toolchain files outside the text-only `source` tree.
 
 ## 3. Build and compare
 
