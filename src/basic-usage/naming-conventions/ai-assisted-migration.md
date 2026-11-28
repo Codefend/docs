@@ -44,7 +44,7 @@ Migrate this project's internal source names to Codefend naming conventions whil
 
 Inspect the repository instructions, language, frameworks, build/test commands, and any existing Codefend configuration first. Work in small, coherent batches using the project's existing tools.
 
-For this m_ migration with Codefend 3.3.0 or later, prefer parser.name: "startWithMAndUnderscore" over "default" in CLI configuration. Select the preset directly, without a custom regexList. The default parser selects broader underscore names and hyphenated file names; the new preset narrows selection to explicitly marked m_ names, reducing unintended changes to unrelated library names, external fields, or paths. Explain any existing requirement for broader path selection before changing an approved configuration.
+For this m_ migration with Codefend 3.3.0 or later, prefer parser.name: "startWithMAndUnderscore" over "default" in CLI configuration. With version 3.3.0 or later of a bundler plugin, select the same preset through parser.name instead of its default codeOnly selection. Select the preset directly, without a custom regexList. The default parser selects broader underscore names and hyphenated file names; the new preset narrows selection to explicitly marked m_ names, reducing unintended changes to unrelated library names, external fields, or paths. Explain any existing requirement for broader path selection before changing an approved configuration.
 
 Use m_ for application-owned names whose declarations and references we control, regardless of whether they are classes, functions, parameters, locals, or members. Examples: m_Calculator, m_calculateTotal, m_order, m_total, and m_balance.
 
@@ -60,7 +60,7 @@ Use syntax-aware symbol refactoring rather than blind text replacement. Update a
 
 Check the installed Codefend version and actual selection rules. Honor an existing approved configuration; explain any proposed parser change. Matching text in strings, comments, and paths can also be selected. From 3.3.0, automatic replacement respects the parser's exact occurrences and casing. Audit external names, generated-name collisions, and pool behavior. Use transformation.ignore where appropriate and verify the generated result.
 
-Honor the project's existing Codefend configuration. The Vite, Rollup, Webpack, and esbuild plugins expose transformation and debug options; do not pass CLI parser or generation settings to them. If Codefend is not configured, report the appropriate CLI or plugin setup and any names that need preserving.
+Honor the project's existing Codefend configuration. Version 3.3.0 or later of the Vite, Rollup, Webpack, and esbuild plugins exposes parser.name, transformation, and debug options. Their parser.name accepts only codeOnly or startWithMAndUnderscore; omit it to retain codeOnly. Do not pass CLI generation settings, custom regexList, or other core parser names to them. If Codefend is not configured, report the appropriate CLI or plugin setup and any names that need preserving.
 
 Run the relevant existing checks before and after renaming. Then, if Codefend is configured, use the established generation or production-build workflow with disposable output and test that generated program or bundle. Check application behavior and external interfaces, not only whether the build succeeds. If a check cannot run or was already failing, report that accurately.
 
@@ -97,6 +97,6 @@ Both versions print `10`. The function, parameter, and local variable are rename
 
 An AI refactor prepares source names; it does not establish that every selected name can be obfuscated safely. Review generated code for public names, collisions, matching strings, and shared references. The `m_` preset reduces selection of unrelated underscore names; it does not determine which APIs or data keys are external.
 
-The CLI supports [parser presets](/advanced-usage/parser/presets) and [custom rules](/advanced-usage/parser/custom-naming-convention). Bundler plugins currently use `codeOnly`, which selects `m_` names and other underscore patterns. They accept `transformation` and `debug` options, without exposing parser selection. `transformation.ignore` preserves words during transformation; it does not exclude source files or dependency directories.
+The CLI supports [parser presets](/advanced-usage/parser/presets) and [custom rules](/advanced-usage/parser/custom-naming-convention). Plugin versions 3.3.0 and later accept `parser.name`, `transformation`, and `debug` options. Select `startWithMAndUnderscore` for the recommended narrower convention, or `codeOnly` for broader underscore matching. Omitted parser settings retain `codeOnly`. `transformation.ignore` preserves words during transformation; it does not exclude source files or dependency directories.
 
 Follow the [code naming convention](./code-naming-convention) and [configuration reference](/references/configuration) for the exact rules. The [examples](/examples/list), [build and deployment guide](/distribution/build-and-deployment), and [troubleshooting guide](/distribution/troubleshooting) show how to inspect and verify the generated application.

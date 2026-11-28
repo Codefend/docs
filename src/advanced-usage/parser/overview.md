@@ -40,7 +40,7 @@ The preset configuration above is complete for `m_` names: no `regexList` or cus
 
 Use a [custom parser](custom-naming-convention) only when your naming convention needs a different expression, such as an existing project using another prefix. The custom-parser guide explains `name: "custom"` and `regexList` for that separate case.
 
-The current bundler adapters select `codeOnly` rather than exposing parser selection.
+Plugin versions 3.3.0 and later accept either `codeOnly` or `startWithMAndUnderscore` through `parser.name`. The narrower `m_` preset is recommended for new projects; `codeOnly` remains the default. Custom regex lists remain available through the core CLI/API.
 
 ## Selection is only one step
 

@@ -1,6 +1,6 @@
 # Code naming convention
 
-For new CLI projects, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets), available in Codefend 3.3.0 or later. Mark application-owned names with `m_`, regardless of their role:
+For new projects using the CLI or a version 3.3.0 bundler plugin, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets), available in Codefend 3.3.0 or later. Mark application-owned names with `m_`, regardless of their role:
 
 - `m_value`
 - `m_readSensor`
@@ -28,7 +28,7 @@ const Ox0 = 7;
 console.log(Ox0);
 ```
 
-Select it in `.codefendrc.json`:
+Select it in `.codefendrc.json`, or pass this `parser` object in the plugin options:
 
 ```json
 {

@@ -73,7 +73,7 @@ The generated config retains `node_modules` during transformation and excludes t
 
 A custom regex list is used only with `name: "custom"`; a built-in name selects its built-in rules. JSON strings must escape backslashes, and values must omit `/` delimiters and flags. See [parser settings](/advanced-usage/parser/overview).
 
-For new CLI projects using explicit `m_` names, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets). It selects `m_total`, `m_Total`, and `m_value2`, while excluding unrelated underscore names. The generated default remains `default`.
+For new CLI projects using explicit `m_` names, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets). It selects `m_total`, `m_Total`, and `m_value2`, while excluding unrelated underscore names. The generated default remains `default`. Plugin versions 3.3.0 and later expose `parser.name` with just `codeOnly` and `startWithMAndUnderscore`; their default remains `codeOnly`.
 
 The parsers operate on both source text and paths. `codeOnly` selects the underscore rule, not a restriction to executable code or a guarantee that filenames remain unchanged.
 

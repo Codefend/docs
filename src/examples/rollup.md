@@ -5,6 +5,8 @@ description: Build and execute a two-module JavaScript project using rollup-plug
 
 # Rollup code obfuscation
 
+Requires version **3.3.0 or later** of the plugin. This guide selects the recommended [`m_` parser preset](/advanced-usage/parser/presets).
+
 The Rollup plugin runs Codefend while source modules are transformed. This example bundles two JavaScript modules into a CommonJS file, then runs that file with Node.js.
 
 ## 1. Install Rollup and the plugin
@@ -12,7 +14,7 @@ The Rollup plugin runs Codefend while source modules are transformed. This examp
 Start in a new directory with `npm init -y`, or use an existing project:
 
 ```sh
-npm install --save-dev rollup@^4 rollup-plugin-codefend
+npm install --save-dev rollup@^4 rollup-plugin-codefend@^3.3.0
 ```
 
 The plugin supports Rollup 3 and 4. Use a Node.js version supported by the bundler release you install.
@@ -20,15 +22,15 @@ The plugin supports Rollup 3 and 4. Use a Node.js version supported by the bundl
 ## 2. Create two source modules
 
 ```js [src/math.js]
-export function l_add(l_left, l_right) {
-  return l_left + l_right;
+export function m_add(m_left, m_right) {
+  return m_left + m_right;
 }
 ```
 
 ```js [src/main.js]
-import { l_add } from "./math.js";
+import { m_add } from "./math.js";
 
-console.log(l_add(2, 3));
+console.log(m_add(2, 3));
 ```
 
 ### Expected obfuscated source
@@ -39,7 +41,7 @@ With the configuration below, the two modules produce this bundle at `dist/bundl
 
 This output comes from an actual build. It still prints `5`; the application helper and its parameters have generated names, while `console.log` is unchanged. Exact identifiers and bundler formatting can vary with the input and tool versions.
 
-The function and parameter names use Codefend's `l_` naming convention. Keep the module's imports consistent with its exports.
+The function and parameter names use Codefend's `m_` naming convention. Keep the module's imports consistent with its exports.
 
 ## 3. Configure the build
 
@@ -54,11 +56,11 @@ export default {
     file: "dist/bundle.cjs",
     format: "cjs",
   },
-  plugins: [codefend()],
+  plugins: [codefend({ parser: { name: "startWithMAndUnderscore" } })],
 };
 ```
 
-The plugin uses its built-in `codeOnly` parser. It accepts `transformation` and `debug` settings; it does not expose a custom parser or a `renderChunk` option. See [Rollup's configuration tutorial](https://rollupjs.org/tutorial/#using-config-files) for the bundler's configuration model.
+The plugin accepts `parser.name`, `transformation`, and `debug` settings. This example selects `startWithMAndUnderscore`; `codeOnly` remains the default when parser settings are omitted. Custom regex lists and a `renderChunk` option are not exposed. See [Rollup's configuration tutorial](https://rollupjs.org/tutorial/#using-config-files) for the bundler's configuration model.
 
 ## 4. Build and execute
 
@@ -73,7 +75,7 @@ The result should be:
 5
 ```
 
-Inspect `dist/bundle.cjs` to confirm that the example's `l_` names were replaced. The precise generated names are not part of this example's contract.
+Inspect `dist/bundle.cjs` to confirm that the example's `m_` names were replaced. The precise generated names are not part of this example's contract.
 
 ## Add this to your workflow
 

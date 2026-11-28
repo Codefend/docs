@@ -21,7 +21,7 @@
     }
   },
   "devDependencies": {
-    "codefend": "^3.2.1",
+    "codefend": "^3.3.0",
     "cspell": "^10.5.2",
     "vitepress": "^1.6.4",
     "vue": "^3.5.46"

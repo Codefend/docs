@@ -17,7 +17,7 @@ npm ci
 npm run docs:dev
 ```
 
-The CLI examples target Codefend 3.3.0 or later and use `startWithMAndUnderscore`. For validation before its npm release, install a locally built tarball after `npm ci`, using `npm install --no-save --package-lock=false /path/to/codefend-3.3.0.tgz`, then run the checks below.
+The CLI examples use the installed Codefend 3.3.0 or later package and select `startWithMAndUnderscore`. The bundler guides require plugin versions 3.3.0 or later to expose the same parser choice.
 
 ## Validation
 

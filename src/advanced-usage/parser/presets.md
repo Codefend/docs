@@ -59,4 +59,6 @@ The expression uses ASCII word boundaries, rather than a language's full identif
 
 ## Bundler plugins
 
-The Vite, Rollup, Webpack, and esbuild plugins currently select `codeOnly`. They do not expose a parser option. Names marked with `m_` also match `codeOnly`, but the narrower preset's exclusions apply only when `startWithMAndUnderscore` is explicitly selected through the CLI or core API.
+From version 3.3.0, the Vite, Rollup, Webpack, and esbuild plugins accept `parser.name` with either `codeOnly` or `startWithMAndUnderscore`. We recommend `startWithMAndUnderscore` for new projects using explicit `m_` names. Omitting `parser`, supplying `parser: {}`, or selecting `codeOnly` retains the existing broader selection.
+
+Pass the same `parser` object shown above in the plugin options. Custom regex lists and the other core presets are not exposed through these plugins. See the [Vite](/examples/vite), [Rollup](/examples/rollup), [Webpack](/examples/webpack), and [esbuild](/examples/esbuild) guides for complete configurations.

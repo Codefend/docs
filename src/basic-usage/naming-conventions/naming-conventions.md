@@ -7,7 +7,7 @@ Codefend selects text using regular expressions. Its built-in conventions cover:
 
 To adopt code naming conventions in an existing project, use the [AI migration guide and copyable prompt](ai-assisted-migration).
 
-For new CLI projects on Codefend 3.3.0 or later, choose [`startWithMAndUnderscore`](/advanced-usage/parser/presets) for explicit `m_` selection. `codeOnly`, `fileOnly`, and `default` remain available for broader or existing conventions. All selected rules operate on both source contents and path text, so a code-oriented parser does not guarantee that every path is preserved.
+For new projects using Codefend 3.3.0 or later, choose [`startWithMAndUnderscore`](/advanced-usage/parser/presets) for explicit `m_` selection. The version 3.3.0 plugins also expose this preset, while retaining `codeOnly` as their default. In core, `codeOnly`, `fileOnly`, and `default` remain available for broader or existing conventions. All selected rules operate on both source contents and path text, so a code-oriented parser does not guarantee that every path is preserved.
 
 Mark names you own. Preserve names required by libraries, entry points, external APIs, serialized data, or other systems outside the transformed project. The [Arduino example](/examples/arduino) demonstrates keeping required sketch names and API calls unchanged.
 

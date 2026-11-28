@@ -57,6 +57,6 @@ This is a text convention, not a syntax-aware member or private-variable parser.
 
 From Codefend 3.3.0, automatic replacement uses the exact occurrences matched by the selected parser. A match for `app_total` does not by itself select the substring in `my_app_total` or a differently cased `APP_TOTAL`. This preserves the custom rule's selection; it does not prevent collisions between generated names and names already in the program.
 
-Review the before/after output, preserve public APIs and external data contracts, and test the generated program. A custom rule helps control selection; it does not make every program safe to rename automatically. Parser selection in the CLI is separate from the options exposed by bundler plugins.
+Review the before/after output, preserve public APIs and external data contracts, and test the generated program. A custom rule helps control selection; it does not make every program safe to rename automatically. Plugin versions 3.3.0 and later expose the built-in `codeOnly` and `startWithMAndUnderscore` presets; custom regex lists remain a core CLI/API option.
 
 See [troubleshooting](/distribution/troubleshooting) for current replacement and mapping limitations.

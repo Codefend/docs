@@ -9,7 +9,7 @@ Choose a language or build tool. Each guide includes source files, configuration
 
 CLI examples outside Node.js projects use one global Codefend installation, so they do not need npm project files. Node.js, TypeScript, and bundler examples keep their tooling local to the project. See [installation](/get-started/installation) to choose the setup. The configurations show only necessary settings; omitted options use Codefend's defaults. `codefend --obfuscate` already runs configuration checking, so a separate `--check` command is optional.
 
-Each guide shows expected obfuscated source directly after the input code and includes a section on adding Codefend to an existing build, test, or CI workflow. CLI examples require Codefend 3.3.0 or later and use the recommended [`startWithMAndUnderscore` preset](/advanced-usage/parser/presets) to select explicit `m_` names without repeating a custom regex. Bundler plugins currently use `codeOnly`.
+Each guide shows expected obfuscated source directly after the input code and includes a section on adding Codefend to an existing build, test, or CI workflow. CLI examples require Codefend 3.3.0 or later and use the recommended [`startWithMAndUnderscore` preset](/advanced-usage/parser/presets) to select explicit `m_` names without repeating a custom regex. The bundler examples require plugin version 3.3.0 or later and explicitly select the same preset; omitted plugin parser settings retain `codeOnly`.
 
 ## Languages
 
