@@ -55,6 +55,8 @@ Choose a [custom parser](custom-naming-convention) when your naming rule differs
 
 The parser selects text; it does not infer whether a symbol is private, public, a member, or a local variable. Only mark names whose consumers you control. Matching text in strings, comments, and paths can also change.
 
+The core CLI's generation workflow can also rename copied folders and files marked with `m_`; see [folder and file naming conventions](/basic-usage/naming-conventions/folders-files-naming-convention). Bundler plugins transform contents and leave output naming to the bundler; they do not provide that CLI copying/renaming step.
+
 The expression uses ASCII word boundaries, rather than a language's full identifier grammar. For example, it can select the `m_total` portion of `$m_total`; whether that is appropriate depends on the source language. Keep external interfaces stable and test the generated program. Pool allocation and replacement-name collisions remain separate concerns; see [troubleshooting](/distribution/troubleshooting).
 
 ## Bundler plugins

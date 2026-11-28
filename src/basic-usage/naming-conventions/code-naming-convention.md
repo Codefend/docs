@@ -4,7 +4,7 @@
 
 From **Codefend 3.3.0**, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets) over the `default` parser for new projects adopting the `m_` convention. It selects explicitly marked names, helping reduce unintended renaming of unrelated underscore names such as `external_value` and `LED_BUILTIN`.
 
-The `default` parser combines broader underscore matching with hyphenated file-name matching. The new preset narrows selection to `m_` names; it does not select those hyphenated names. Choose this convention when you can mark the internal names whose callers you control.
+The `default` parser combines broader underscore matching with hyphenated file-name matching. The new preset uses only the narrower `m_` rule. Choose this convention when you can mark the internal names whose callers you control.
 
 Select the preset in `.codefendrc.json`:
 
@@ -59,6 +59,20 @@ console.log(Ox0(5));
 Both versions print `12`. The marked function, parameter, and local variable are renamed. `external_value` and `console.log` retain their names. Generated identifiers can vary with the input and processing order.
 
 `m_Total` and `m_value2` are selected. `m_2total`, `M_total`, and `m_total_amount` are excluded. This narrower rule leaves unrelated underscore names such as `external_value` and `LED_BUILTIN` alone. It does not infer ownership or visibility; only mark names whose consumers you control.
+
+## Folder and file names with the CLI
+
+The same `m_` convention can mark folder and file names when using Codefend's CLI generation workflow. With `startWithMAndUnderscore` selected, copied output can look like this:
+
+| Source path                        | Generated path        |
+| ---------------------------------- | --------------------- |
+| `source/m_models/m_calculator.cjs` | `release/Ox0/Ox1.cjs` |
+
+Both `m_models` and `m_calculator` match the rule; the `.cjs` extension stays unchanged. Matching references in source text, such as `require("./m_models/m_calculator.cjs")`, use the same mapping. Generated names depend on processing order. The source files remain unchanged.
+
+This file/folder renaming step belongs to the core CLI's copying workflow. The Vite, Rollup, Webpack, and esbuild plugins transform contents; they leave source files in place and let the bundler control output paths and filenames. Selecting the preset in a plugin does not enable the CLI's path-renaming workflow.
+
+Matching text inside import strings can still change during a plugin transformation. Keep import paths stable and use `transformation.ignore` to preserve matching path names when needed; the plugin does not move the referenced files to match those text changes. See [folder and file naming conventions](./folders-files-naming-convention) for the CLI workflow and names your toolchain requires.
 
 ## Existing broader conventions
 
