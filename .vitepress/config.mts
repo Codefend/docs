@@ -118,6 +118,10 @@ export default defineConfig({
                 link: "/advanced-usage/parser/overview",
               },
               {
+                text: "Presets",
+                link: "/advanced-usage/parser/presets",
+              },
+              {
                 text: "Custom Naming convention",
                 link: "/advanced-usage/parser/custom-naming-convention",
               },

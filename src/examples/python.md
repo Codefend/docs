@@ -5,6 +5,8 @@ description: Obfuscate selected Python function and variable names with Codefend
 
 # Obfuscate Python source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example calculates a discounted order total in integer cents. Codefend renames our function and local identifiers; Python still executes the resulting source.
 
 Install a [Python interpreter](https://www.python.org/downloads/) and [Node.js for Codefend](/get-started/installation). Start in a new directory:
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `1800`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Our identifiers use `l_`. Python's `print`, `__name__`, and `"__main__"` stay unchanged. Keep Python's special names and any public package API stable.
+Our identifiers use `m_`. Python's `print`, `__name__`, and `"__main__"` stay unchanged. Keep Python's special names and any public package API stable.
 
 ## 2. Configure selective renaming
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/python/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom rule selects this example's `l_` names. The default empty pool uses generated names with the `Ox` prefix. Plain `main.py` does not match the rule, so its filename stays unchanged.
+The default empty pool uses generated names with the `Ox` prefix. Plain `main.py` does not match the rule, so its filename stays unchanged.
 
 `release` is disposable sibling output. Codefend removes an existing output directory; keep it separate from original files. Process source text only: keep virtual environments, `__pycache__`, bytecode, native extensions, and other binary assets outside `source`.
 
@@ -65,7 +67,7 @@ That is two items at 1,000 cents each, with a 10% discount. Compare the output a
 
 Preserve public imports, decorators, framework hooks, serialization fields, and names used through `getattr`, `globals`, or other dynamic lookups. Renaming a function parameter can also affect callers that supply it as a keyword argument. This single-file example controls all callers; larger projects need matching changes and tests across modules.
 
-Matching is textual and can affect comments, strings, case variants, or longer identifiers containing a stored name. This is source obfuscation, with no guarantee that a distributed Python program or its bytecode cannot be inspected. See [current limitations](/distribution/troubleshooting).
+Matching is textual and can also affect comments and strings. Check external contracts and generated-name collisions. This is source obfuscation, with no guarantee that a distributed Python program or its bytecode cannot be inspected. See [current limitations](/distribution/troubleshooting).
 
 ## Add Codefend to your workflow
 

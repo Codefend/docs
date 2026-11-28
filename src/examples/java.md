@@ -5,6 +5,8 @@ description: Rename internal Java helper names with Codefend and run original an
 
 # Obfuscate Java source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example transforms one Java source file, compiles each version, and compares an order-total calculation. Codefend changes selected source text; it does not process `.class` files or JARs.
 
 ## 1. Add the Java source
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `75`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Preserve the public class name `Main`, its matching `Main.java` filename, and `public static void main`. Only the helper and parameters we own use `l_`. `System.out.println` belongs to the Java platform and stays unchanged. This standalone example needs no Maven, Gradle, or npm project files.
+Preserve the public class name `Main`, its matching `Main.java` filename, and `public static void main`. Only the helper and parameters we own use `m_`. `System.out.println` belongs to the Java platform and stays unchanged. This standalone example needs no Maven, Gradle, or npm project files.
 
 ## 2. Configure selective matching
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/java/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom rule selects this example's `l_` identifiers; it does not match `Main.java`. Keep only source text under `source`. Reserve sibling `release` for generated source because Codefend replaces its output directory. Compiled classes belong outside both trees.
+It does not match `Main.java`. Keep only source text under `source`. Reserve sibling `release` for generated source because Codefend replaces its output directory. Compiled classes belong outside both trees.
 
 ## 3. Run and compare
 
@@ -61,7 +63,7 @@ The JDK's [source-file launcher](https://docs.oracle.com/en/java/javase/25/docs/
 
 Keep public APIs, package/class relationships, reflection strings, service-provider declarations, JNI bindings, serialization contracts, and framework-discovered names compatible with their callers. Do not rename a method only because it is private: reflection can still reference it.
 
-Codefend does not analyze Java syntax or bytecode. Text replacements can also affect strings, comments, and longer names. Compile and run the complete generated application; review [current mapping and replacement limitations](/distribution/troubleshooting) before adopting custom pools or a larger input tree.
+Codefend does not analyze Java syntax or bytecode. Matching text in strings and comments can also change. Compile and run the complete generated application; review [current mapping and replacement limitations](/distribution/troubleshooting) before adopting custom pools or a larger input tree.
 
 ## Add Codefend to your workflow
 

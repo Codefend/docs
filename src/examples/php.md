@@ -5,6 +5,8 @@ description: Use Codefend to rename application-owned PHP functions and variable
 
 # Obfuscate PHP source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This PHP CLI example calculates an order total in integer cents. The application function and local variables are renamed; PHP's own functions and constants remain intact.
 
 Install the [PHP CLI](https://www.php.net/manual/en/features.commandline.php) and [Node.js for Codefend](/get-started/installation). In a new directory, install Codefend:
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `1800`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Only names we own use `l_`. The custom rule matches the name after `$` in a variable, leaving the dollar sign in place. `intdiv`, `PHP_EOL`, language keywords, and the PHP opening tag are preserved.
+Only names we own use `m_`. The `startWithMAndUnderscore` preset matches the name after `$` in a variable, leaving the dollar sign in place. `intdiv`, `PHP_EOL`, language keywords, and the PHP opening tag are preserved.
 
 ## 2. Configure Codefend
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/php/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-This source-only input and disposable sibling `release` directory keep generated files separate from originals. Codefend removes an existing output directory before generation. The default empty pool uses generated prefix-and-sequence names, and the plain `main.php` path does not match the custom rule.
+This source-only input and disposable sibling `release` directory keep generated files separate from originals. Codefend removes an existing output directory before generation. The default empty pool uses generated prefix-and-sequence names, and the plain `main.php` path does not match the preset.
 
 Keep Composer dependencies, images, sessions, caches, and other unrelated assets outside this input tree. Codefend currently reads copied file contents as text.
 
@@ -63,7 +65,7 @@ The result represents two items at 1,000 cents each, less 10%. PHP documents thi
 
 Preserve public class/method names, framework callbacks, route contracts, autoload paths, and fields used by serializers or templates. Test variable functions, reflection, and string-based method/property access. Named arguments are also part of a callable's external contract: changing a parameter name can affect callers.
 
-This example keeps all function calls together and uses positional arguments. Codefend performs text replacement rather than PHP-aware symbol analysis. Its case and boundary limitations can matter even though PHP treats some kinds of names case-insensitively. Check the [current limitations](/distribution/troubleshooting) and run the generated application's tests before distribution.
+This example keeps all function calls together and uses positional arguments. Codefend performs text replacement rather than PHP-aware symbol analysis. The preset is case-sensitive even where PHP treats names case-insensitively, so use consistent spelling for every declaration and reference. Check the [current limitations](/distribution/troubleshooting) and run the generated application's tests before distribution.
 
 ## Add Codefend to your workflow
 

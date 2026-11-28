@@ -2,12 +2,12 @@
 
 Codefend selects text using regular expressions. Its built-in conventions cover:
 
-- [Code names](code-naming-convention), such as `l_temperature` and `f_readSensor`.
+- [Code names](code-naming-convention), such as `m_temperature` and `m_readSensor`.
 - [Folder and file names](folders-files-naming-convention), such as `pkg-source` and `file-sensor`.
 
 To adopt code naming conventions in an existing project, use the [AI migration guide and copyable prompt](ai-assisted-migration).
 
-Choose `codeOnly`, `fileOnly`, or `default` in the [parser settings](/advanced-usage/parser/overview) to select the corresponding rules. All selected rules operate on both source contents and path text. For example, `codeOnly` can still match an underscore name in a filename; it does not guarantee that every path is preserved.
+For new CLI projects on Codefend 3.3.0 or later, choose [`startWithMAndUnderscore`](/advanced-usage/parser/presets) for explicit `m_` selection. `codeOnly`, `fileOnly`, and `default` remain available for broader or existing conventions. All selected rules operate on both source contents and path text, so a code-oriented parser does not guarantee that every path is preserved.
 
 Mark names you own. Preserve names required by libraries, entry points, external APIs, serialized data, or other systems outside the transformed project. The [Arduino example](/examples/arduino) demonstrates keeping required sketch names and API calls unchanged.
 

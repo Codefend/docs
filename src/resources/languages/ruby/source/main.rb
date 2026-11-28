@@ -1,7 +1,7 @@
-def l_total(l_price, l_count, l_percent)
-  l_subtotal = l_price * l_count
-  l_discount = l_subtotal * l_percent / 100
-  l_subtotal - l_discount
+def m_total(m_price, m_count, m_percent)
+  m_subtotal = m_price * m_count
+  m_discount = m_subtotal * m_percent / 100
+  m_subtotal - m_discount
 end
 
-puts l_total(1000, 2, 10)
+puts m_total(1000, 2, 10)

@@ -1,12 +1,12 @@
-fn l_total(l_values: &[i32]) -> i32 {
-    let mut l_sum = 0;
-    for l_value in l_values {
-        l_sum += *l_value;
+fn m_total(m_values: &[i32]) -> i32 {
+    let mut m_sum = 0;
+    for m_value in m_values {
+        m_sum += *m_value;
     }
-    l_sum
+    m_sum
 }
 
 fn main() {
-    let l_values = [12, 18, 12];
-    println!("{}", l_total(&l_values));
+    let m_values = [12, 18, 12];
+    println!("{}", m_total(&m_values));
 }

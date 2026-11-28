@@ -1,7 +1,7 @@
-const l_greeting = "Hello";
+const m_greeting = "Hello";
 
-function l_fullName(l_firstName, l_lastName) {
-  return `${l_firstName} ${l_lastName}`;
+function m_fullName(m_firstName, m_lastName) {
+  return `${m_firstName} ${m_lastName}`;
 }
 
-console.log(`${l_greeting}, ${l_fullName("Ada", "Lovelace")}!`);
+console.log(`${m_greeting}, ${m_fullName("Ada", "Lovelace")}!`);

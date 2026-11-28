@@ -1,24 +1,24 @@
 # Code naming convention
 
-The built-in `codeOnly` rule finds names consisting of ASCII letters followed by one or more underscore-separated alphanumeric segments. Examples include:
+For new CLI projects, we recommend [`startWithMAndUnderscore`](/advanced-usage/parser/presets), available in Codefend 3.3.0 or later. Mark application-owned names with `m_`, regardless of their role:
 
-- `l_value`
-- `f_readSensor`
+- `m_value`
+- `m_readSensor`
 - `m_camera`
-- `c_UserManager`
-- `node_John_Doe`
+- `m_UserManager`
+- `m_value2`
 
-The parser's regular expression is:
+The preset's regular expression is:
 
 ```js
-/([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g;
+/\bm_[A-Za-z][A-Za-z0-9]*\b/g;
 ```
 
 You can mark internal names while leaving required APIs unchanged. For a fresh runtime processing this snippet alone:
 
 ```js
-const l_value = 7;
-console.log(l_value);
+const m_value = 7;
+console.log(m_value);
 ```
 
 the output is:
@@ -28,9 +28,21 @@ const Ox0 = 7;
 console.log(Ox0);
 ```
 
-## Optional prefixes
+Select it in `.codefendrc.json`:
 
-Prefixes can communicate the original role of a name to maintainers:
+```json
+{
+  "parser": {
+    "name": "startWithMAndUnderscore"
+  }
+}
+```
+
+`m_Total` and `m_value2` are selected. `m_2total`, `M_total`, and `m_total_amount` are excluded. This narrower rule leaves unrelated underscore names such as `external_value` and `LED_BUILTIN` alone. It does not infer ownership or visibility; only mark names whose consumers you control.
+
+## Existing broader conventions
+
+The `codeOnly` preset supports broader underscore patterns. Existing projects can retain role-based prefixes such as:
 
 | Convention     | Example         |
 | -------------- | --------------- |
@@ -40,9 +52,9 @@ Prefixes can communicate the original role of a name to maintainers:
 | Local variable | `l_total`       |
 | Member         | `m_temperature` |
 
-Codefend does not infer those roles. All of these names match the same underscore rule, and comments or strings containing them can also change.
+Codefend does not infer those roles. These names match `codeOnly`, whose expression is `/([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g`. The `startWithMAndUnderscore` preset selects only the `m_` convention.
 
-The current rule and replacement engine can match parts of longer names. Use consistent casing, preserve external interfaces, and test both selected names and names that should remain unchanged. `codeOnly` also operates on path text; it does not guarantee filenames remain unchanged.
+All rules can select text in comments, strings, and paths. From 3.3.0, automatic replacement respects the selected parser's exact matches and casing. Preserve external interfaces and test both names that should change and names that should remain unchanged.
 
 For an existing project, use the [AI migration prompt](./ai-assisted-migration) to ask a coding assistant to adopt these conventions while preserving external interfaces and updating references.
 

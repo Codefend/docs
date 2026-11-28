@@ -1,10 +1,10 @@
-function l_total {
-    param([int[]]$l_values)
-    $l_sum = 0
-    foreach ($l_value in $l_values) {
-        $l_sum += $l_value
+function m_total {
+    param([int[]]$m_values)
+    $m_sum = 0
+    foreach ($m_value in $m_values) {
+        $m_sum += $m_value
     }
-    return $l_sum
+    return $m_sum
 }
 
-Write-Output (l_total @(12, 18, 12))
+Write-Output (m_total @(12, 18, 12))

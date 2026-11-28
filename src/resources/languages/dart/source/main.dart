@@ -1,9 +1,9 @@
 void main() {
-  int l_total(int l_price, int l_count, int l_percent) {
-    final l_subtotal = l_price * l_count;
-    final l_discount = l_subtotal * l_percent ~/ 100;
-    return l_subtotal - l_discount;
+  int m_total(int m_price, int m_count, int m_percent) {
+    final m_subtotal = m_price * m_count;
+    final m_discount = m_subtotal * m_percent ~/ 100;
+    return m_subtotal - m_discount;
   }
 
-  print(l_total(1000, 2, 10));
+  print(m_total(1000, 2, 10));
 }

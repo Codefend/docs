@@ -15,8 +15,8 @@ Merge this fragment into your configuration:
 For a fresh runtime processing:
 
 ```js
-const l_value = external_value;
-console.log(l_value);
+const m_value = external_value;
+console.log(m_value);
 ```
 
 the output is:
@@ -28,7 +28,7 @@ console.log(Ox0);
 
 Ignored entries are added directly to the replacement map, even if a parser did not discover them. In the current implementation, ignore mappings take precedence over static mappings for the same original text.
 
-Use ordinary identifier spellings. In Codefend, regex metacharacters in static or ignore names can affect the replacement regex. Matching is textual and current case/boundary limitations still apply.
+From Codefend 3.3.0, static keys and ignore entries are treated as literal text rather than extra regular expressions. Use the exact spelling of the selected name: matching is case-sensitive. Matching text in strings and comments can also be selected; check external contracts and generated-name collisions.
 
 ## Excluding files is a separate setting
 

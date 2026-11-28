@@ -9,7 +9,7 @@ Choose a language or build tool. Each guide includes source files, configuration
 
 CLI examples outside Node.js projects use one global Codefend installation, so they do not need npm project files. Node.js, TypeScript, and bundler examples keep their tooling local to the project. See [installation](/get-started/installation) to choose the setup. The configurations show only necessary settings; omitted options use Codefend's defaults. `codefend --obfuscate` already runs configuration checking, so a separate `--check` command is optional.
 
-Each guide shows expected obfuscated source directly after the input code and includes a section on adding Codefend to an existing build, test, or CI workflow. The custom CLI parser deliberately selects the examples' `l_` names; [read why](/advanced-usage/parser/custom-naming-convention) before choosing a broader convention.
+Each guide shows expected obfuscated source directly after the input code and includes a section on adding Codefend to an existing build, test, or CI workflow. CLI examples require Codefend 3.3.0 or later and use the recommended [`startWithMAndUnderscore` preset](/advanced-usage/parser/presets) to select explicit `m_` names without repeating a custom regex. Bundler plugins currently use `codeOnly`.
 
 ## Languages
 
@@ -46,12 +46,12 @@ The automated docs checks verify each language fixture's actual Codefend transfo
 
 ## Bundlers
 
-| Build tool                   | Guide                                                                         |
-| ---------------------------- | ----------------------------------------------------------------------------- |
+| Build tool                   | Guide                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------- |
 | [Vite](/examples/vite)       | Use the dedicated Vite plugin, which runs automatically during production builds. |
-| [esbuild](/examples/esbuild) | Build and execute two JavaScript modules with esbuild-plugin-codefend. |
-| [Rollup](/examples/rollup)   | Bundle a two-module JavaScript example.                                       |
-| [Webpack](/examples/webpack) | Process a production JavaScript bundle with the official plugin.              |
+| [esbuild](/examples/esbuild) | Build and execute two JavaScript modules with esbuild-plugin-codefend.            |
+| [Rollup](/examples/rollup)   | Bundle a two-module JavaScript example.                                           |
+| [Webpack](/examples/webpack) | Process a production JavaScript bundle with the official plugin.                  |
 
 Read [how it works](/get-started/how-it-works), [naming conventions](/basic-usage/naming-conventions/naming-conventions), and [troubleshooting](/distribution/troubleshooting) for shared configuration and current limitations.
 

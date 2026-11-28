@@ -5,12 +5,14 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
 import { dirname, join, resolve, sep } from "node:path";
 import { createRequire } from "node:module";
+import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import {
   buildParserOptions,
@@ -21,7 +23,7 @@ import {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const examples = join(root, "src/resources/languages");
-const scratch = join(root, ".local");
+const scratch = realpathSync.native(tmpdir());
 mkdirSync(scratch, { recursive: true });
 const temporary = mkdtempSync(join(scratch, "language-check-"));
 const require = createRequire(import.meta.url);
@@ -44,6 +46,8 @@ try {
       [],
     );
     assert.ok(metadata.sourceFiles.includes(metadata.entry));
+    assert.equal(config.parser.name, "startWithMAndUnderscore");
+    assert.equal(config.parser.regexList, undefined);
     const parser = buildParserOptions(config.parser);
     assert.equal(parser.error, undefined);
     const transformation = buildTransformationOptions(config.transformation);
@@ -91,7 +95,7 @@ try {
         preview.replaceAll("\r\n", "\n"),
         `Stale source preview: ${language}/${file}; run npm run examples:update`,
       );
-      assert.doesNotMatch(output, /\bl_[A-Za-z][A-Za-z0-9]*\b/, language);
+      assert.doesNotMatch(output, /\bm_[A-Za-z][A-Za-z0-9]*\b/, language);
       assert.notEqual(
         output,
         input,
@@ -156,10 +160,12 @@ try {
     }
     results.push(result);
   }
-  writeFileSync(
-    join(scratch, "language-example-results.json"),
-    JSON.stringify(results, null, 2) + "\n",
-  );
+  if (process.env.CODEFEND_EXAMPLE_RESULTS) {
+    writeFileSync(
+      process.env.CODEFEND_EXAMPLE_RESULTS,
+      JSON.stringify(results, null, 2) + "\n",
+    );
+  }
   console.log(
     `Verified actual Codefend CLI transformations, filenames, original preservation, and inverse mappings for ${results.length} language examples.`,
   );

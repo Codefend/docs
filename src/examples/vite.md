@@ -113,7 +113,7 @@ Test the application served from `dist` before deployment. Retain the framework 
 ## Applying this to a larger application
 
 - Keep public API names, framework entry points, external JSON fields, and names expected by third-party code stable.
-- The plugin exposes `transformation` and `debug` options. Custom parser rules and a built-in `mPrefix` parser are not available through this plugin.
+- The plugin uses `codeOnly` and exposes `transformation` and `debug` options. Parser selection is not exposed through this plugin.
 - Codefend uses text matching; it does not infer component ownership or coordinate HTML, CSS, and JavaScript selectors automatically. Test the production application, including lazy-loaded routes and any shared names.
 - This example uses the default generated-name strategy and an empty pool. Test custom pools across all modules before adopting them; shared pool allocation has known limitations.
 - The plugin does not provide a separate HTML or CSS asset transformation step. Its hook returns transformed source without a corresponding Codefend source map. Validate your debugging requirements before enabling production source maps.

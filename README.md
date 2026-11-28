@@ -17,6 +17,8 @@ npm ci
 npm run docs:dev
 ```
 
+The CLI examples target Codefend 3.3.0 or later and use `startWithMAndUnderscore`. For validation before its npm release, install a locally built tarball after `npm ci`, using `npm install --no-save --package-lock=false /path/to/codefend-3.3.0.tgz`, then run the checks below.
+
 ## Validation
 
 ```sh
@@ -38,6 +40,8 @@ VitePress is kept on stable 1.6.4. A scoped override updates its Vite dependency
 Add complete tutorials under `src/examples`, with a descriptive title and description in frontmatter. Link them from the sidebar and example index. Keep reusable code under `src/resources` and import it into Markdown so the displayed code matches the files checked by scripts.
 
 Language fixtures live under `src/resources/languages/<language>/`: a `source` directory, `codefend.config.json`, and `example.json` with the route, source filenames, entry file, and expected output. The scripts discover these fixtures to check transformation behavior and require each guide in the generated sitemap. Keep build artifacts outside `source`.
+
+CLI fixtures mark application-owned identifiers with `m_` and select the `startWithMAndUnderscore` preset. Use custom parsers only when demonstrating a different convention. The check/update scripts use temporary directories outside this repository. Set `CODEFEND_EXAMPLE_RESULTS` to an output path to retain the language checks as JSON.
 
 Recommend global Codefend installation for CLI tutorials outside Node.js projects, and local dependencies for Node.js, TypeScript, and bundler projects. Prefer supported source-file runners when they avoid a separate project or build configuration. Show required configuration and meaningful overrides; leave default options implicit. The obfuscation command already checks configuration.
 

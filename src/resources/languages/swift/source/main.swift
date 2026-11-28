@@ -1,5 +1,5 @@
-private func l_total(_ l_unitPrice: Int, _ l_count: Int, _ l_discount: Int) -> Int {
-    return l_unitPrice * l_count - l_discount
+private func m_total(_ m_unitPrice: Int, _ m_count: Int, _ m_discount: Int) -> Int {
+    return m_unitPrice * m_count - m_discount
 }
 
-print(l_total(20, 4, 5))
+print(m_total(20, 4, 5))
