@@ -5,6 +5,8 @@ description: Obfuscate selected private Rust functions and variables with Codefe
 
 # Obfuscate a Rust program
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Codefend can rename selected application identifiers in Rust source. This single-file example totals a slice of integers while keeping the entry point and standard macro names unchanged.
 
 ## 1. Create the source
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Only our helper, parameters, and locals use `l_`. Keep `main`, Rust keywords/types, and `println!` unchanged.
+Only our helper, parameters, and locals use `m_`. Keep `main`, Rust keywords/types, and `println!` unchanged.
 
 ## 2. Configure selection
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` beside `source`:
 
 <<< @/resources/languages/rust/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom parser selects these marked ASCII names. The lowercase `ox` prefix produces names such as `ox0`, compatible with the naming style used for the example's functions and locals. The default empty pool uses generated names without a limited replacement dictionary.
+The lowercase `ox` prefix produces names such as `ox0`, compatible with the naming style used for the example's functions and locals. The default empty pool uses generated names without a limited replacement dictionary.
 
 `release` is a disposable sibling directory. Codefend replaces existing output, so keep original source and valuable files outside it. Keep build artifacts out of the processed input tree.
 

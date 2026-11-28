@@ -5,6 +5,8 @@ description: Use Codefend with R to rename application-owned names, preserve ext
 
 # R source obfuscation
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Obfuscate a small R calculation while preserving the built-in `sum`, `c`, and `cat` functions. The script prints the total of three values.
 
 Install R with the `Rscript` command and [Node.js/Codefend](/get-started/installation).
@@ -29,7 +31,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-The `l_` names belong to this example. Public output and external API names remain unchanged.
+The `m_` names belong to this example. Public output and external API names remain unchanged.
 
 ## 2. Configure selected names
 
@@ -37,9 +39,9 @@ Create `.codefendrc.json` alongside the `source` directory:
 
 <<< @/resources/languages/r/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom rule selects the example's application names. The lowercase `ox` prefix produces names such as `ox0`; the default empty pool avoids a limited replacement dictionary. The plain `main.R` filename does not match this rule.
+The lowercase `ox` prefix produces names such as `ox0`; the default empty pool avoids a limited replacement dictionary. The plain `main.R` filename does not match this rule.
 
 `release` must be a disposable sibling of `source`. Codefend removes existing output before generation. Keep this input text-only, with build products and dependencies outside it.
 
@@ -65,7 +67,7 @@ See [Rscript reference](https://stat.ethz.ch/R-manual/R-devel/library/utils/html
 
 R uses names in named arguments, formulas, data-frame columns, and non-standard evaluation. Keep those external contracts stable, including names used with `get`, `assign`, or package exports. This example only renames a private helper, its parameter, and a local result.
 
-Codefend matches and replaces text, including text in strings or comments. A custom discovery rule does not provide syntax-aware renaming or eliminate core's current boundary/case limitations. See [troubleshooting](/distribution/troubleshooting) before applying the convention to a larger project.
+Codefend matches and replaces text, including text in strings or comments. The preset does not infer language syntax, visibility, or external data contracts. See [troubleshooting](/distribution/troubleshooting) before applying the convention to a larger project.
 
 Browse the other [language and build examples](/examples/list).
 

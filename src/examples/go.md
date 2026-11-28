@@ -5,6 +5,8 @@ description: Use Codefend to rename selected unexported Go helpers and local var
 
 # Obfuscate a Go program
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example transforms a small Go command's source before compilation. It keeps `package main`, the entry point, and imported APIs stable. A lowercase generated prefix preserves the helper's unexported naming.
 
 ## 1. Create the program
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-The private helper and locals use `l_`; `main`, `fmt`, and `Println` remain unchanged. This program uses only the standard library.
+The private helper and locals use `m_`; `main`, `fmt`, and `Println` remain unchanged. This program uses only the standard library.
 
 ## 2. Configure names and output
 
@@ -35,7 +37,7 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/go/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
 The `ox` prefix is deliberately lowercase. Go uses an identifier's first character to determine whether a package-level name is exported. An uppercase replacement such as `Ox0` would change an unexported helper into an exported name. See [exported identifiers in the Go specification](https://go.dev/ref/spec#Exported_identifiers).
 

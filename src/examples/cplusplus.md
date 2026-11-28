@@ -5,6 +5,8 @@ description: Rename selected private C++ identifiers with Codefend, keep public 
 
 # Obfuscate a C++ program
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Codefend can rename selected identifiers in C++ source before you compile or distribute it. This example totals three values through a small private helper, preserving `main` and standard library names.
 
 ## 1. Create the source
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-The helper, its parameters, and a local result use `l_`. The `stdio.h` header and `printf` function retain their library names. The three values total `42`.
+The helper, its parameters, and a local result use `m_`. The `stdio.h` header and `printf` function retain their library names. The three values total `42`.
 
 ## 2. Configure application names
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/cplusplus/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom parser selects this example's marked names; it does not parse templates or infer C++ access control. The plain `main.cpp` filename does not match the rule. The default empty pool avoids limited dictionary allocation across calls.
+It does not parse templates or infer C++ access control. The plain `main.cpp` filename does not match the rule. The default empty pool avoids limited dictionary allocation across calls.
 
 Keep `release` as disposable sibling output because Codefend removes that directory before writing. Keep compiled objects, archives, and executables outside the source tree. Read [output-directory guidance](/basic-usage/obfuscation) before running it on an existing project.
 
@@ -67,7 +69,7 @@ Public class/member names, exported symbols, plugin interfaces, reflection regis
 
 Templates, macros, generated headers, resource files, and build-system rules can carry additional references. Codefend does not update an ABI or understand overloads and C++ scopes. Extend the naming convention gradually and compile the complete generated tree, including tests.
 
-Text matching also affects matching string contents and can replace substrings that a custom discovery rule excluded. Review [current limitations](/distribution/troubleshooting), especially case/boundary handling and shared pools, before using a broader convention.
+Matching text in strings and comments can also change. Review [current limitations](/distribution/troubleshooting), especially name collisions and shared pools, before extending this example.
 
 For Arduino-specific filename and callback requirements, see the [Arduino example](/examples/arduino).
 

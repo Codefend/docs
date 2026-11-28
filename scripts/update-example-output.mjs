@@ -5,11 +5,13 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
 import { createRequire } from "node:module";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -18,7 +20,7 @@ const require = createRequire(import.meta.url);
 const cli = resolve(dirname(require.resolve("codefend")), "../bin/index.js");
 const resources = join(root, "src/resources");
 const languages = join(resources, "languages");
-const scratch = join(root, ".local");
+const scratch = realpathSync.native(tmpdir());
 mkdirSync(scratch, { recursive: true });
 const temporary = mkdtempSync(join(scratch, "preview-update-"));
 const examples = readdirSync(languages).map((language) => {

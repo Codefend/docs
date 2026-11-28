@@ -2,7 +2,7 @@
 
 ## 1. Find matching text
 
-A [parser](/advanced-usage/parser/overview) is a list of regular expressions. The built-in rules find underscore names such as `l_temperature` and certain hyphenated paths such as `file-sensor`.
+A [parser](/advanced-usage/parser/overview) is a list of regular expressions. The built-in rules find underscore names such as `m_temperature` and certain hyphenated paths such as `file-sensor`.
 
 Matching is textual: Codefend does not resolve variable scope, distinguish a class member from a local variable, or restrict matches to executable code. The same text in a string or comment can be selected.
 
@@ -11,8 +11,8 @@ Matching is textual: Codefend does not resolve variable scope, distinguish a cla
 The [transformation settings](/advanced-usage/transformation/list) choose what each selected word becomes. The default uses `Ox` followed by an index. For a fresh runtime processing this snippet alone:
 
 ```js
-const l_value = 7;
-console.log(l_value);
+const m_value = 7;
+console.log(m_value);
 ```
 
 the output is:

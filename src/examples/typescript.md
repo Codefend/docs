@@ -5,6 +5,8 @@ description: Obfuscate selected TypeScript identifiers with Codefend, compile bo
 
 # Obfuscate TypeScript source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This example applies Codefend to TypeScript before compiling it to JavaScript. The program calculates a discounted order total in integer cents.
 
 Install [Node.js](/get-started/installation), then start in a new directory:
@@ -36,9 +38,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/typescript/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom rule selects the `l_` application identifiers. It leaves this example's plain filename unchanged. The default empty pool uses generated prefix-and-sequence names.
+It leaves this example's plain filename unchanged. The default empty pool uses generated prefix-and-sequence names.
 
 Reserve `release` for generated source, separate from `source`. Codefend removes an existing output directory. Keep compiled JavaScript, source maps, declaration files, dependencies, and binary assets outside the processed input.
 

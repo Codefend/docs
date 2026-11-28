@@ -2,13 +2,13 @@ using System;
 
 public class Program
 {
-    private static int l_total(int l_unitPrice, int l_count, int l_discount)
+    private static int m_total(int m_unitPrice, int m_count, int m_discount)
     {
-        return l_unitPrice * l_count - l_discount;
+        return m_unitPrice * m_count - m_discount;
     }
 
     public static void Main()
     {
-        Console.WriteLine(l_total(20, 4, 5));
+        Console.WriteLine(m_total(20, 4, 5));
     }
 }

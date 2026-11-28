@@ -1,8 +1,8 @@
-def l_total(l_price, l_count, l_percent):
-    l_subtotal = l_price * l_count
-    l_discount = l_subtotal * l_percent // 100
-    return l_subtotal - l_discount
+def m_total(m_price, m_count, m_percent):
+    m_subtotal = m_price * m_count
+    m_discount = m_subtotal * m_percent // 100
+    return m_subtotal - m_discount
 
 
 if __name__ == "__main__":
-    print(l_total(1000, 2, 10))
+    print(m_total(1000, 2, 10))

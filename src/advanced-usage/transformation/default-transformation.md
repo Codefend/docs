@@ -15,8 +15,8 @@ Merge this fragment into your configuration:
 For a fresh runtime processing this snippet alone:
 
 ```js
-const l_value = 7;
-console.log(l_value);
+const m_value = 7;
+console.log(m_value);
 ```
 
 the output is:

@@ -5,6 +5,8 @@ description: Use Codefend to rename an application-owned CSS class consistently 
 
 # HTML and CSS class obfuscation
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 HTML and CSS use names shared across files. This example renames an application-owned class in the HTML and its stylesheet together. It preserves the stylesheet path, element names, and browser attributes.
 
 ## 1. Create the page and stylesheet
@@ -37,7 +39,7 @@ With the configuration in the next step, Codefend produces:
 
 The generated page should still display a bold `42`; the HTML class and CSS selector stay aligned. Generated identifier numbers can change when the source or Codefend version changes.
 
-Open `source/index.html` in a browser. It should display a bold `42`. The `l_result` class belongs to this example; standard attributes and CSS properties remain unchanged.
+Open `source/index.html` in a browser. It should display a bold `42`. The `m_result` class belongs to this example; standard attributes and CSS properties remain unchanged.
 
 ## 2. Configure both files together
 
@@ -45,9 +47,9 @@ Save `.codefendrc.json` alongside the `source` directory:
 
 <<< @/resources/languages/htmlcss/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-Both files are processed with one shared runtime. The custom rule selects the same class text in each file. Keep the default empty pool to avoid the current cross-file pool-allocation limitations. Plain filenames such as `index.html` and `styles.css` do not match this rule.
+Both files are processed with one shared runtime. The `startWithMAndUnderscore` preset selects the same class text in each file. Keep the default empty pool to avoid the current cross-file pool-allocation limitations. Plain filenames such as `index.html` and `styles.css` do not match this rule.
 
 `release` is disposable sibling output: Codefend removes existing output before copying. Keep images, fonts, and other binary assets outside this source-only example and copy them separately in a real build.
 

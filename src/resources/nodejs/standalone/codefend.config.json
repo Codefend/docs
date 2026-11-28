@@ -4,6 +4,6 @@
     "outputDir": "release"
   },
   "parser": {
-    "name": "codeOnly"
+    "name": "startWithMAndUnderscore"
   }
 }

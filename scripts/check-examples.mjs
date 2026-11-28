@@ -6,18 +6,20 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  realpathSync,
   readdirSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
 import { createRequire } from "node:module";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const cli = resolve(dirname(require.resolve("codefend")), "../bin/index.js");
-const scratch = join(root, ".local");
+const scratch = realpathSync.native(tmpdir());
 mkdirSync(scratch, { recursive: true });
 const temporary = mkdtempSync(join(scratch, "example-check-"));
 
@@ -52,7 +54,7 @@ try {
   );
   assert.doesNotMatch(
     readFileSync(join(nodeExample, "release/index.cjs"), "utf8"),
-    /\bl_[A-Za-z]/,
+    /\bm_[A-Za-z]/,
   );
   assert.equal(
     readFileSync(join(nodeExample, "release/index.cjs"), "utf8").replaceAll(
@@ -115,7 +117,7 @@ try {
   ]) {
     assert.ok(generated.includes(name), `Arduino symbol lost: ${name}`);
   }
-  assert.doesNotMatch(generated, /\bl_[A-Za-z]/);
+  assert.doesNotMatch(generated, /\bm_[A-Za-z]/);
   console.log(
     "Node.js original/generated execution and Arduino source transformation passed.",
   );

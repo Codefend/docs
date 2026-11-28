@@ -1,10 +1,10 @@
-l_total() {
-  local l_sum=0
-  local l_value
-  for l_value in "$@"; do
-    l_sum=$((l_sum + l_value))
+m_total() {
+  local m_sum=0
+  local m_value
+  for m_value in "$@"; do
+    m_sum=$((m_sum + m_value))
   done
-  printf '%s\n' "$l_sum"
+  printf '%s\n' "$m_sum"
 }
 
-l_total 12 18 12
+m_total 12 18 12

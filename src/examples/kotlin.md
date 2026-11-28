@@ -5,6 +5,8 @@ description: Apply Codefend to selected Kotlin source identifiers, preserve the 
 
 # Obfuscate Kotlin source
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 This Kotlin/JVM example renames an application-owned helper and its parameters before compilation. It calculates an order total while preserving `main` and Kotlin's `println` API.
 
 ## 1. Create the source
@@ -27,7 +29,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `75`. Generated identifier numbers can change when the source or Codefend version changes.
 
-Only names belonging to this example use `l_`. Keep `main`, `Int`, and `println` unchanged. This is a standalone Kotlin/JVM console program, not an Android or Kotlin/Native integration.
+Only names belonging to this example use `m_`. Keep `main`, `Int`, and `println` unchanged. This is a standalone Kotlin/JVM console program, not an Android or Kotlin/Native integration.
 
 ## 2. Configure the transformation
 
@@ -35,9 +37,9 @@ Create `.codefendrc.json` in the project root:
 
 <<< @/resources/languages/kotlin/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom regex selects `l_` names in this source; the plain `Main.kt` filename stays unchanged. The default empty pool uses generated `Ox` identifiers.
+The plain `Main.kt` filename stays unchanged. The default empty pool uses generated `Ox` identifiers.
 
 Keep `source` text-only and `release` as disposable sibling output. Codefend removes an existing output directory. Keep JARs, downloaded libraries, and build caches outside the input tree.
 

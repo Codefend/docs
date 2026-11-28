@@ -5,6 +5,8 @@ description: Use Codefend with Bash to rename application-owned names, preserve 
 
 # Bash source obfuscation
 
+Requires Codefend **3.3.0 or later** for the [recommended `m_` preset](/advanced-usage/parser/presets).
+
 Rename a script-local Bash function and its local variables. The script totals three arguments and prints the result without changing shell built-ins.
 
 Use Bash and [Node.js/Codefend](/get-started/installation). On Windows, use a Bash environment such as Git Bash; run the commands from the same project directory.
@@ -29,7 +31,7 @@ With the configuration in the next step, Codefend produces:
 
 The program's expected output remains `42`. Generated identifier numbers can change when the source or Codefend version changes.
 
-The `l_` names belong to this example. Public output and external API names remain unchanged.
+The `m_` names belong to this example. Public output and external API names remain unchanged.
 
 ## 2. Configure selected names
 
@@ -37,9 +39,9 @@ Create `.codefendrc.json` alongside the `source` directory:
 
 <<< @/resources/languages/bash/codefend.config.json
 
-The custom rule makes `l_` an explicit selection convention for application-owned names. It avoids discovering unrelated underscore names such as `LED_BUILTIN`, which the broader `codeOnly` rule would select. This narrows discovery rather than providing syntax-aware renaming; read [why these examples use a custom parser](/advanced-usage/parser/custom-naming-convention) and its replacement limitations.
+The `startWithMAndUnderscore` preset selects this example's `m_` names, leaving unrelated underscore names alone. See [parser presets](/advanced-usage/parser/presets) for the exact rule and why we recommend this convention.
 
-The custom rule selects the example's application names. The lowercase `ox` prefix produces names such as `ox0`; the default empty pool avoids a limited replacement dictionary. The plain `main.sh` filename does not match this rule.
+The lowercase `ox` prefix produces names such as `ox0`; the default empty pool avoids a limited replacement dictionary. The plain `main.sh` filename does not match this rule.
 
 `release` must be a disposable sibling of `source`. Codefend removes existing output before generation. Keep this input text-only, with build products and dependencies outside it.
 
@@ -65,7 +67,7 @@ See [Bash shell functions](https://www.gnu.org/software/bash/manual/html_node/Sh
 
 Bash variable and function names are case-sensitive. Preserve exported environment variables, command names, command-line option names, and functions sourced by other scripts. Dynamic names used with `eval` or indirect expansion need additional checks. This script is for Bash, not every shell.
 
-Codefend matches and replaces text, including text in strings or comments. A custom discovery rule does not provide syntax-aware renaming or eliminate core's current boundary/case limitations. See [troubleshooting](/distribution/troubleshooting) before applying the convention to a larger project.
+Codefend matches and replaces text, including text in strings or comments. The preset does not infer language syntax, visibility, or external data contracts. See [troubleshooting](/distribution/troubleshooting) before applying the convention to a larger project.
 
 Browse the other [language and build examples](/examples/list).
 
