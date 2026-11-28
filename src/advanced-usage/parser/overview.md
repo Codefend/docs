@@ -34,29 +34,13 @@ This explicit selection helps preserve library APIs and framework entry points w
 
 See [parser presets](presets) for selected and excluded names, including `m_Total` and `m_2total`.
 
-## Custom rules
+The preset configuration above is complete for `m_` names: no `regexList` or custom rule label is needed.
 
-Use `name: "custom"` with a nonempty `regexList` when your naming convention needs a different expression:
+## When to use a custom rule
 
-```json
-{
-  "parser": {
-    "name": "custom",
-    "regexList": [
-      {
-        "name": "appOwnedNames",
-        "value": "\\bapp_[A-Za-z][A-Za-z0-9]*\\b"
-      }
-    ]
-  }
-}
-```
+Use a [custom parser](custom-naming-convention) only when your naming convention needs a different expression, such as an existing project using another prefix. The custom-parser guide explains `name: "custom"` and `regexList` for that separate case.
 
-This custom example selects `app_` names followed by an ASCII letter and then letters or digits.
-
-Each item has a descriptive `name` and a regex-source string in `value`. Codefend compiles custom expressions with the `g` flag. Omit surrounding `/` delimiters and flags; JSON requires doubled backslashes.
-
-Supplying `regexList` with a built-in `name` does not override that built-in parser. The current bundler adapters select their built-in `codeOnly` parser rather than exposing this custom-parser setting.
+The current bundler adapters select `codeOnly` rather than exposing parser selection.
 
 ## Selection is only one step
 

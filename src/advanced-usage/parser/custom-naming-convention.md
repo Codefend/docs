@@ -2,6 +2,8 @@
 
 Use a custom parser when your naming rule differs from the [built-in presets](presets). For the `m_` convention used by the CLI examples, choose `startWithMAndUnderscore` in Codefend 3.3.0 or later; no custom regex is needed.
 
+The `appOwnedNames` label below belongs only to this page's custom `app_` rule. It is not a parser preset and is not needed when selecting `startWithMAndUnderscore` directly.
+
 ## Why choose a custom rule?
 
 Suppose an existing project marks its internal names with `app_`. A custom rule lets you keep that convention while excluding unrelated names such as `external_value` or Arduino's `LED_BUILTIN`, which the broader `codeOnly` rule would select.
